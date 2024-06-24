@@ -1,0 +1,12 @@
+apiVersion: v1
+entries:
+  antennas:
+  - apiVersion: v2
+    created: "2024-06-24T12:01:13.073666485Z"
+    description: Deploys antennas the DVR emulator for Plex DVR. Github - https://github.com/jfarseneau/antennas
+    digest: 9412fb24ee73e4fbdf4066cddcd016639ceea2da279b02678c1acdadc8f4b6ff
+    name: antennas
+    urls:
+    - https://deB4SH.github.io/helm-charts/antennas-0.0.1.tgz
+    version: 0.0.1
+generated: "2024-06-24T12:01:13.073247052Z"
