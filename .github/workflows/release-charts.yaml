@@ -6,7 +6,7 @@ on:
 
 # permissions are needed if pushing to ghcr.io
 permissions: 
-  packages: write
+  contents: write
 
 jobs:
   release:     
