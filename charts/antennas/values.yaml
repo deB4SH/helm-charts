@@ -1,0 +1,40 @@
+configuration:
+  antennas_url: "http://127.0.0.1:5004"
+  tvheaded_url: "http://127.0.0.1:9981"
+  tuner_count: "2"
+
+deployment:
+  replicaCount: 1
+  image:
+    location: "ghcr.io/jfarseneau/antennas"
+    tag: "4.2.0"
+  resources:
+    limits:
+      cpu: 150m
+      memory: 100Mi
+    requests:
+      cpu: 50m
+      memory: 30Mi
+  securityContext:
+    capabilities:
+      drop:
+      - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 10000
+    runAsGroup: 10000
+    # fsGroup: 20000
+
+ingress:
+  enabled: false
+  hostname: antennas.local.lan
+  ingressClassName: nginx
+  annotations: {}
+    # cert-manager.io/cluster-issuer: selfsigned-issuer
+
+service:
+  clusterIp:
+    enabled: true
+  loadbalancerIp:
+    enabled: false
+    ip: "127.0.0.1"

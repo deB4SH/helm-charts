@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: antennas
+data:
+  ANTENNAS_URL: {{ .Values.configuration.antennas_url }}
+  TVHEADEND_URL: {{ .Values.configuration.tvheaded_url }}
+  TUNER_COUNT: "{{ .Values.configuration.tuner_count }}"

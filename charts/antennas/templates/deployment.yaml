@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: antennas
+spec:
+  replicas: {{ .Values.deployment.replicaCount }}
+  selector:
+    matchLabels:
+      app: antennas
+  template:
+    metadata:
+      labels:
+        app: antennas
+      name: antennas
+    spec:
+      containers:
+        - image: {{ .Values.deployment.image.location }}:{{ .Values.deployment.image.tag }}
+          imagePullPolicy: IfNotPresent
+          name: antennas
+          ports:
+            - containerPort: 5004
+              name: http
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          envFrom:
+            - configMapRef:
+                name: antennas
+          resources: 
+            {{- toYaml .Values.deployment.resources | nindent 12 }}
+          securityContext: {{ toYaml .Values.deployment.securityContext | nindent 12 }}
