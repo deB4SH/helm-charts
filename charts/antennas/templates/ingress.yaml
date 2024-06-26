@@ -3,14 +3,16 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: antennas-ingress
-  labels:
-    app: antennas
   annotations:
     {{- range $key, $val := .Values.ingress.annotations }}
     {{ $key }}: "{{ $val }}"
     {{- end }}
 spec:
   ingressClassName:  {{ .Values.ingress.ingressClassName }}
+  tls:
+    - hosts:
+        - {{ .Values.ingress.name }}
+      secretName: {{ .Values.ingress.name }}
   rules:
     - host: {{ .Values.ingress.hostname }}
       http:
