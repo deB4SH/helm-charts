@@ -1,0 +1,10 @@
+apiVersion: v2
+name: kanboard
+version: 0.0.1
+appVersion: "v1.2.26"
+type: application
+description: Kanban project management software
+icon: https://avatars.githubusercontent.com/u/13722943
+home: https://github.com/deB4SH/helm-charts
+sources:
+  - https://github.com/kanboard/kanboard

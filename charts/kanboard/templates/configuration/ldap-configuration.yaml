@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kanboard-ldap-configuration
+data:
+  LDAP_AUTH: "{{.Values.configuration.ldap.auth}}"
+  LDAP_SERVER: "{{.Values.configuration.ldap.server}}"
+  LDAP_PORT: "{{.Values.configuration.ldap.port}}"
+  LDAP_SSL_VERIFY: "{{.Values.configuration.ldap.sslVerify}}"
+  LDAP_START_TLS: "{{.Values.configuration.ldap.startTls}}"
+  LDAP_USERNAME_CASE_SENSITIVE: "{{.Values.configuration.ldap.usernameCaseSensitive}}"
+  LDAP_BIND_TYPE: "{{.Values.configuration.ldap.bindType}}"
+  LDAP_USER_BASE_DN: "{{.Values.configuration.ldap.userBaseDn}}"
+  LDAP_USER_FILTER: "{{.Values.configuration.ldap.userFilter}}"
+  LDAP_GROUP_USER_ATTRIBUTE: "{{.Values.configuration.ldap.groupUserAttribute}}"
+  LDAP_USER_ATTRIBUTE_USERNAME: "{{.Values.configuration.ldap.userAttributeUsername}}"
+  LDAP_USER_ATTRIBUTE_FULLNAME: "{{.Values.configuration.ldap.userAttributeFullname}}"
+  LDAP_USER_ATTRIBUTE_EMAIL: "{{.Values.configuration.ldap.userAttributeEmail}}"
+  LDAP_USER_ATTRIBUTE_GROUPS: "{{.Values.configuration.ldap.userAttributeGroups}}"
+  LDAP_USER_ATTRIBUTE_PHOTO: "{{.Values.configuration.ldap.userAttributePhoto}}"
+  LDAP_USER_ATTRIBUTE_LANGUAGE: "{{.Values.configuration.ldap.userAttributeLanguage}}"
+  LDAP_USER_CREATION: "{{.Values.configuration.ldap.userCreation}}"
+  LDAP_USER_DEFAULT_ROLE_MANAGER: "{{.Values.configuration.ldap.userDefaultRoleManager}}"
+  LDAP_GROUP_ADMIN_DN: "{{.Values.configuration.ldap.groupAdminDn}}"
+  LDAP_GROUP_MANAGER_DN: "{{.Values.configuration.ldap.groupManagerDn}}"
+  LDAP_GROUP_PROVIDER: "{{.Values.configuration.ldap.groupProvider}}"
+  LDAP_GROUP_BASE_DN: "{{.Values.configuration.ldap.groupBaseDn}}"
+  LDAP_GROUP_FILTER: "{{.Values.configuration.ldap.groupFilter}}"
+  LDAP_GROUP_USER_FILTER: "{{.Values.configuration.ldap.groupUserFilter}}"
+  LDAP_GROUP_ATTRIBUTE_NAME_: "{{.Values.configuration.ldap.groupAttributeName}}"

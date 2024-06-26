@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kanboard-email-configuration
+data:
+  MAIL_CONFIGURATION: "{{.Values.configuration.emailConfiguration.enabled}}"
+  MAIL_FROM: "{{.Values.configuration.emailConfiguration.from}}"
+  MAIL_TRANSPORT: "{{.Values.configuration.emailConfiguration.transport}}"
+  # sender configuration
+  MAIL_SMTP_HOSTNAME: "{{.Values.configuration.emailConfiguration.smtpHostname}}"
+  MAIL_SMTP_PORT: "{{.Values.configuration.emailConfiguration.smtpPort}}"
+  MAIL_SMTP_HELO_NAME: "{{.Values.configuration.emailConfiguration.smtpHeloName}}"
+  MAIL_SMTP_ENCRYPTION: "{{.Values.configuration.emailConfiguration.smtpEncryption}}"
+  MAIL_SENDMAIL_COMMAND: "{{.Values.configuration.emailConfiguration.sendMailCommand}}"
+  MAIL_BCC: "{{.Values.configuration.emailConfiguration.bcc}}"

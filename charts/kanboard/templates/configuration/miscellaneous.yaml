@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kanboard-miscellaneous
+data:
+  MARKDOWN_ESCAPE_HTML: "{{.Values.configuration.miscellaneous.markdownEscapeHtml}}"
+  API_AUTHENTICATION_HEADER: "{{.Values.configuration.miscellaneous.apiAuthHeader}}"
+  HIDE_LOGIN_FORM: "{{.Values.configuration.miscellaneous.hideLoginForm}}"
+  DISABLE_LOGOUT: "{{.Values.configuration.miscellaneous.disableLogout}}"
+  API_AUTHENTICATION_TOKEN: "{{.Values.configuration.miscellaneous.apiAuthToken}}"
+  TOTP_ISSUER: "{{.Values.configuration.miscellaneous.totpIssuer}}"
+  EXTERNAL_AUTH_EXCLUDE_FIELDS: "{{.Values.configuration.miscellaneous.externalAuthExcludeFields}}"

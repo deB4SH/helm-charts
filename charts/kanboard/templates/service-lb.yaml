@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: kanboard-lb
+spec:
+  type: LoadBalancer
+  selector:
+    app: kanboard
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      protocol: TCP
+  externalTrafficPolicy: Local
+  loadBalancerIP: {{ .Values.service.loadbalancer.ip }}
+  

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kanboard-logging
+data:
+  DEBUG: "{{.Values.configuration.logging.debug}}"
+  LOG_DRIVER: "{{.Values.configuration.logging.logDriver}}"
+  LOG_FILE: "{{.Values.configuration.logging.logFile}}"

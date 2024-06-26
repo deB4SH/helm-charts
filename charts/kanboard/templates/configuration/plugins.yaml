@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kanboard-plugins
+data:
+  PLUGINS_DIR: "{{.Values.configuration.plugins.dir}}"
+  PLUGIN_INSTALLER: "{{.Values.configuration.plugins.installer}}"
+  PLUGIN_API_URL: "{{.Values.configuration.plugins.apiUrl}}"

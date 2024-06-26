@@ -1,0 +1,140 @@
+deployment:
+  sleepStart: false # is used to create all deployments and override the command with a while true
+  replicaCount: 1
+  rolloutStrategy: Recreate
+  image:
+    location: ghcr.io/kanboard/kanboard
+    tag: v1.2.26 
+  resources:
+    limits:
+      cpu: 150m
+      memory: 100Mi
+    requests:
+      cpu: 50m
+      memory: 30Mi
+
+pvc:
+  data:
+    accessMode: ReadWriteMany
+    #only applied when set
+    storageClass:
+    #size in Gi
+    storageSize: 5
+  plugins:
+    accessMode: ReadWriteMany
+    #only applied when set
+    storageClass:
+    #size in Gi
+    storageSize: 5
+
+service: 
+  loadbalancer:
+    ip: 127.0.0.1
+
+ingress:
+  enabled: false
+  ingressClass: nginx
+  hostname: kanboard.local.lan
+  annotations: {}
+    # cert-manager.io/cluster-issuer: selfsigned-issuer
+
+configuration:
+  bruteforceProtection:
+    captcha: "3"
+    lockdown: "6"
+    lockdownDuration: "15"
+  cacheParameters:
+    driver: "memory"
+    cacheDir: "/tmp/cache"
+  databaseConfiguration:
+    username: "overlay_me"
+    password: "overlay_me"
+    runMigrations: "true"
+    driver: "sqlite"
+    hostname: "localhost"
+    name: "kanboard"
+    port: ""
+    sslkey: ""
+    sslcert: ""
+    sslca: ""
+  emailConfiguration:
+    username: "overlay_me"
+    password: "overlay_me"
+    enabled: "true"
+    from: "notifications@kanboard.local"
+    transport: "mail"
+    smtpHostname: ""
+    smtpPort: "25"
+    smtpHeloName: ""
+    smtpEncryption: ""
+    sendMailCommand: "/usr/sbin/sendmail -bs"
+    bcc: ""
+  httpClient:
+    username: ""
+    password: ""
+    proxyHostname: ""
+    proxyPort: ""
+    proxyExclude: "localhost"
+    verifySsl: "true"
+  ldap:
+    username: ""
+    password: ""
+    auth: "false"
+    server: ""
+    port: "389"
+    sslVerify: "true"
+    startTls: "false"
+    usernameCaseSensitive: "false"
+    bindType: "anonymous"
+    userBaseDn: ""
+    userFilter: ""
+    groupUserAttribute: "dn"
+    userAttributeUsername: "uid"
+    userAttributeFullname: "cn"
+    userAttributeEmail: "mail"
+    userAttributeGroups: "memberof"
+    userAttributePhoto: ""
+    userAttributeLanguage: ""
+    userCreation: "true"
+    userDefaultRoleManager: "false"
+    groupAdminDn: ""
+    groupManagerDn: ""
+    groupProvider: "false"
+    groupBaseDn: ""
+    groupFilter: ""
+    groupUserFilter: ""
+    groupAttributeName: "cn"
+  logging:
+    debug: "false"
+    logDriver: "stdout"
+    logFile: "/tmp/dbg.log"
+  miscellaneous:
+    markdownEscapeHtml: "true"
+    apiAuthHeader: ""
+    hideLoginForm: "false"
+    disableLogout: "false"
+    apiAuthToken: "MyUniqueToken"
+    totpIssuer: "Kanboard"
+    externalAuthExcludeFields: "username"
+  plugins:
+    dir: "data/plugins"
+    installer: "false"
+    apiUrl: "https://kanboard.org/plugins.json"
+  rememberMe:
+    auth: "true"
+  reverseProxyConfiguration:
+    proxyAuth: "false"
+    proxyUserHeader: "REMOTE_USER"
+    proxyEmailHeader: "REMOTE_EMAIL"
+    proxyDefaultAdmin: ""
+    proxyDefaultDomain: ""
+  secureHttpHeaders:
+    enableHsts: "true"
+    enableXframe: "true"
+  session: 
+    duration: "0"
+    handler: "db"
+  uploadedFiles:
+    dir: "data/files"
+  urlRewrite:
+    enable: "false"

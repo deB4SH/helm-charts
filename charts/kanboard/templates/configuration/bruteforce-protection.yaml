@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kanboard-bruteforce-protection
+data:
+  BRUTEFORCE_CAPTCHA: "{{.Values.configuration.bruteforceProtection.captcha}}"
+  BRUTEFORCE_LOCKDOWN: "{{.Values.configuration.bruteforceProtection.lockdown}}"
+  BRUTEFORCE_LOCKDOWN_DURATION: "{{.Values.configuration.bruteforceProtection.lockdownDuration}}"

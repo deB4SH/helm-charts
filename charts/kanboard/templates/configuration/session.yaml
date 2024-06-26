@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kanboard-session
+data:
+  SESSION_DURATION: "{{.Values.configuration.session.duration}}"
+  SESSION_HANDLER: "{{.Values.configuration.session.handler}}"

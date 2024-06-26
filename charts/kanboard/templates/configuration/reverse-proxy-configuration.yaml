@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kanboard-reverse-proxy-configuration
+data:
+  REVERSE_PROXY_AUTH: "{{.Values.configuration.reverseProxyConfiguration.proxyAuth}}"
+  REVERSE_PROXY_USER_HEADER: "{{.Values.configuration.reverseProxyConfiguration.proxyUserHeader}}"
+  REVERSE_PROXY_EMAIL_HEADER: "{{.Values.configuration.reverseProxyConfiguration.proxyEmailHeader}}"
+  REVERSE_PROXY_DEFAULT_ADMIN: "{{.Values.configuration.reverseProxyConfiguration.proxyDefaultAdmin}}"
+  REVERSE_PROXY_DEFAULT_DOMAIN: "{{.Values.configuration.reverseProxyConfiguration.proxyDefaultDomain}}"

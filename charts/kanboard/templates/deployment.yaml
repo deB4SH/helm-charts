@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kanboard
+  labels:
+    app: kanboard
+spec:
+  replicas: {{ .Values.deployment.replicaCount }}
+  revisionHistoryLimit: 3
+  progressDeadlineSeconds: 600
+  strategy:
+    type: {{ .Values.deployment.rolloutStrategy }}
+  selector:
+    matchLabels:
+      app: kanboard
+  template:
+    metadata:
+      labels:
+        app: kanboard
+      annotations:
+        checksum/ldapConfiguration: {{ include (print $.Template.BasePath "/configuration/ldap-configuration.yaml") . | sha256sum }}
+        checksum/ldapConfigurationSecret: {{ include (print $.Template.BasePath "/configuration/ldap-configuration-secret.yaml") . | sha256sum }}
+        checksum/databaseConfiguration: {{ include (print $.Template.BasePath "/configuration/database-configuration.yaml") . | sha256sum }}
+        checksum/databaseConfigurationSecret: {{ include (print $.Template.BasePath "/configuration/database-configuration-secret.yaml") . | sha256sum }}
+        checksum/emailConfiguration: {{ include (print $.Template.BasePath "/configuration/email-configuration.yaml") . | sha256sum }}
+        checksum/emailConfigurationSecret: {{ include (print $.Template.BasePath "/configuration/email-configuration-secret.yaml") . | sha256sum }}
+    spec:
+      containers:
+        - name: kanboard
+          image: {{ .Values.deployment.image.location }}:{{ .Values.deployment.image.tag }}
+          imagePullPolicy: IfNotPresent
+          {{- if .Values.deployment.sleepStart }}
+          # Just spin & wait forever
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "while true; do sleep 30; done;" ]
+          {{- end }}
+          envFrom:
+          - configMapRef:
+              name: kanboard-bruteforce-protection
+          - configMapRef:
+              name: kanboard-cache-parameters
+          - configMapRef:
+              name: kanboard-database-configuration
+          - secretRef:
+              name: kanboard-database-configuration-secret
+          - secretRef:
+              name: kanboard-email-configuration-secret
+          - configMapRef:
+              name: kanboard-email-configuration
+          - secretRef:
+              name: kanboard-http-client-secret
+          - configMapRef:
+              name: kanboard-http-client
+          - secretRef:
+              name: kanboard-ldap-configuration-secret
+          - configMapRef:
+              name: kanboard-ldap-configuration
+          - configMapRef:
+              name: kanboard-logging
+          - configMapRef:
+              name: kanboard-miscellaneous
+          - configMapRef:
+              name: kanboard-plugins
+          - configMapRef:
+              name: kanboard-rememberme
+          - configMapRef:
+              name: kanboard-reverse-proxy-configuration
+          - configMapRef:
+              name: kanboard-secure-http-headers
+          - configMapRef:
+              name: kanboard-session
+          - configMapRef:
+              name: kanboard-uploaded-files
+          - configMapRef:
+              name: kanboard-url-rewrite
+          resources:
+            {{- toYaml .Values.deployment.resources | nindent 12 }}
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+          volumeMounts:
+          - mountPath: /var/www/app/data
+            name: data
+          - mountPath: /var/www/app/plugins
+            name: plugins
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: kanboard-data
+        - name: plugins
+          persistentVolumeClaim:
+            claimName: kanboard-plugins
+        

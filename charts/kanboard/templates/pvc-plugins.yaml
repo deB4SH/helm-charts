@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kanboard-plugins
+spec:
+  accessModes:
+    - {{ .Values.pvc.plugins.accessMode }}
+  {{ if .Values.pvc.plugins.storageClass }}
+  storageClassName: {{ .Values.pvc.plugins.storageClass }}
+  {{ end}}
+  resources:
+    requests:
+      storage: {{ .Values.pvc.plugins.storageSize }}Gi

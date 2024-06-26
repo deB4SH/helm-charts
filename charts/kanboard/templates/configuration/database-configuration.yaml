@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kanboard-database-configuration
+data:
+  DB_RUN_MIGRATIONS: "{{.Values.configuration.databaseConfiguration.runMigrations}}"
+  DB_DRIVER: "{{.Values.configuration.databaseConfiguration.driver}}"
+  DB_HOSTNAME: "{{.Values.configuration.databaseConfiguration.hostname}}"
+  DB_NAME: "{{.Values.configuration.databaseConfiguration.name}}"
+  DB_PORT: "{{.Values.configuration.databaseConfiguration.port}}"
+  DB_SSL_KEY: "{{.Values.configuration.databaseConfiguration.sslkey}}"
+  DB_SSL_CERT: "{{.Values.configuration.databaseConfiguration.sslcert}}"
+  DB_SSL_CA: "{{.Values.configuration.databaseConfiguration.sslca}}"
