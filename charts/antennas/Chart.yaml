@@ -1,4 +1,4 @@
 apiVersion: v2
 name: antennas
-version: 0.0.1
+version: 0.0.2
 description: Deploys antennas the DVR emulator for Plex DVR. Github - https://github.com/jfarseneau/antennas
