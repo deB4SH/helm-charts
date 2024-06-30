@@ -1,20 +1,21 @@
-{{- if .Values.ingress.enabled }}
+{{- range .Values.ingresses}}
+{{- if .enabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: kanboard-ingress
+  name: kanboard-ingress-{{ .hostname }}
   annotations:
-    {{- range $key, $val := .Values.ingress.annotations }}
+    {{- range $key, $val := .annotations }}
     {{ $key }}: "{{ $val }}"
     {{- end }}
 spec:
-  ingressClassName:  {{ .Values.ingress.ingressClassName }}
+  ingressClassName:  {{ .ingressClassName }}
   tls:
     - hosts:
-        - {{ .Values.ingress.hostname }}
-      secretName: {{ .Values.ingress.hostname }}
+        - {{ .hostname }}
+      secretName: {{ .hostname }}
   rules:
-    - host: {{ .Values.ingress.hostname }}
+    - host: {{ .hostname }}
       http:
         paths:
           - path: /
@@ -24,4 +25,5 @@ spec:
                 name: kanboard-clusterip
                 port:
                   number: 80
+{{- end }}
 {{- end }}

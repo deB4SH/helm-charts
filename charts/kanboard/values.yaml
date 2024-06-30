@@ -31,12 +31,17 @@ service:
   loadbalancer:
     ip: 127.0.0.1
 
-ingress:
-  enabled: false
-  ingressClass: nginx
-  hostname: kanboard.local.lan
-  annotations: {}
-    # cert-manager.io/cluster-issuer: selfsigned-issuer
+ingresses:
+  - enabled: false
+    ingressClass: nginx
+    hostname: kanboard.local.lan
+    annotations: {}
+      # cert-manager.io/cluster-issuer: selfsigned-issuer
+  - enabled: false
+    ingressClass: nginx
+    hostname: todo.local.lan
+    annotations: {}
+      # cert-manager.io/cluster-issuer: selfsigned-issuer
 
 configuration:
   bruteforceProtection:
