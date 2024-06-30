@@ -2,6 +2,14 @@ apiVersion: v1
 entries:
   antennas:
   - apiVersion: v2
+    created: "2024-06-30T13:53:51.579950674Z"
+    description: Deploys antennas the DVR emulator for Plex DVR. Github - https://github.com/jfarseneau/antennas
+    digest: dca8e6a85d8b52c891d227a7883c8ec11820f88aaec7f9ec40b4523d21c976b2
+    name: antennas
+    urls:
+    - https://deB4SH.github.io/helm-charts/antennas-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
     created: "2024-06-26T13:31:18.93717653Z"
     description: Deploys antennas the DVR emulator for Plex DVR. Github - https://github.com/jfarseneau/antennas
     digest: 758855772faf3b9f00e4d7d56208bac721b139adcd7697354b2739563a21323b
@@ -10,6 +18,20 @@ entries:
     - https://deB4SH.github.io/helm-charts/antennas-0.0.1.tgz
     version: 0.0.1
   kanboard:
+  - apiVersion: v2
+    appVersion: v1.2.26
+    created: "2024-06-30T13:53:51.580725695Z"
+    description: Kanban project management software
+    digest: ecf44158d52620b8d06ee3b8ec34186d95ae7b570ef5312186adb5927c53b395
+    home: https://github.com/deB4SH/helm-charts
+    icon: https://avatars.githubusercontent.com/u/13722943
+    name: kanboard
+    sources:
+    - https://github.com/kanboard/kanboard
+    type: application
+    urls:
+    - https://deB4SH.github.io/helm-charts/kanboard-0.0.2.tgz
+    version: 0.0.2
   - apiVersion: v2
     appVersion: v1.2.26
     created: "2024-06-26T13:31:18.938826385Z"
@@ -24,4 +46,4 @@ entries:
     urls:
     - https://deB4SH.github.io/helm-charts/kanboard-0.0.1.tgz
     version: 0.0.1
-generated: "2024-06-26T13:31:18.936758689Z"
+generated: "2024-06-30T13:53:51.57955335Z"
