@@ -1,3 +1,4 @@
+{{- if .Value.enabled.l2announce }}
 apiVersion: cilium.io/v2alpha1
 kind: CiliumL2AnnouncementPolicy
 metadata:
@@ -5,3 +6,4 @@ metadata:
 spec:
   externalIPs: true
   loadBalancerIPs: true
+{{- end }}
