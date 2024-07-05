@@ -12,13 +12,19 @@ cilium:
   kubeProxyReplacement: true
   rollOutCiliumPods: true
 
+  ipam: # -- Configure IP Address Management mode.
+    # ref: https://docs.cilium.io/en/stable/network/concepts/ipam/
+    mode: "cluster-pool" 
+    ciliumNodeUpdateRate: "15s" # -- Maximum rate at which the CiliumNode custom resource is updated.
+    operator:
+      clusterPoolIPv4PodCIDRList: ["10.64.0.0/10"] # -- IPv4 CIDR list range to delegate to individual nodes for IPAM.    
+      clusterPoolIPv4MaskSize: 24 # -- IPv4 CIDR mask size to delegate to individual nodes for IPAM.
+      clusterPoolIPv6PodCIDRList: ["fd00::/104"] # -- IPv6 CIDR list range to delegate to individual nodes for IPAM.
+      clusterPoolIPv6MaskSize: 120 # -- IPv6 CIDR mask size to delegate to individual nodes for IPAM.
+
   operator:
     replicas: 1
-    clusterPoolIPv4PodCIDRList: ["10.64.0.0/10"] # -- IPv4 CIDR list range to delegate to individual nodes for IPAM.    
-    clusterPoolIPv4MaskSize: 24 # -- IPv4 CIDR mask size to delegate to individual nodes for IPAM.
-    clusterPoolIPv6PodCIDRList: ["fd00::/104"] # -- IPv6 CIDR list range to delegate to individual nodes for IPAM.
-    clusterPoolIPv6MaskSize: 120 # -- IPv6 CIDR mask size to delegate to individual nodes for IPAM.
-
+    
   k8sClientRateLimit:
     qps: 50
     burst: 100
