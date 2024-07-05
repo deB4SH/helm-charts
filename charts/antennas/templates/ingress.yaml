@@ -1,20 +1,22 @@
-{{- if .Values.ingress.enabled }}
+{{- range .Values.ingresses}}
+{{- if .enabled }}
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: antennas-ingress
+  name: antennas-ingress-{{ .hostname | replace "." "-"}}
   annotations:
     {{- range $key, $val := .Values.ingress.annotations }}
     {{ $key }}: "{{ $val }}"
     {{- end }}
 spec:
-  ingressClassName:  {{ .Values.ingress.ingressClassName }}
+  ingressClassName:  {{ .ingressClassName }}
   tls:
     - hosts:
-        - {{ .Values.ingress.name }}
-      secretName: {{ .Values.ingress.name }}
+        - {{ .hostname }}
+      secretName: {{ .hostname }}
   rules:
-    - host: {{ .Values.ingress.hostname }}
+    - host: {{ .hostname }}
       http:
         paths:
           - path: /

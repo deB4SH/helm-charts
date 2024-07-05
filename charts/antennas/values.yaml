@@ -25,12 +25,12 @@ deployment:
     runAsGroup: 10000
     # fsGroup: 20000
 
-ingress:
-  enabled: false
-  hostname: antennas.local.lan
-  ingressClassName: nginx
-  annotations: {}
-    # cert-manager.io/cluster-issuer: selfsigned-issuer
+ingresses:
+  - enabled: false
+    hostname: antennas.local.lan
+    ingressClassName: nginx
+    annotations: {}
+      # cert-manager.io/cluster-issuer: selfsigned-issuer
 
 service:
   clusterIp:
