@@ -1,0 +1,10 @@
+traefik: 
+  providers:
+    kubernetesIngress:
+      enabled: true
+      allowEmptyServices: true
+      publishedServices:
+        enabled: true
+
+  additionalArguments:
+    - "--providers.kubernetesingress.ingressendpoint.publishedservice=traefik/traefik"
