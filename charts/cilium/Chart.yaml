@@ -1,0 +1,8 @@
+apiVersion: v2
+name: cilium
+version: 0.0.1
+description: This Chart deploys cilium with prepared l2 components, envoy and hubble. This is primarly useful for homelab environments.
+dependencies:
+  - name: cilium
+    version: 1.15.6
+    repository: https://helm.cilium.io/

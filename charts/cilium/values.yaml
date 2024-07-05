@@ -1,0 +1,31 @@
+ipPool:
+  - start: "" #TODO: overlay me with your correct subnet
+    stop: "" #TODO: overlay me with your correct subnet
+
+cilium:
+  k8sServiceHost: "" #TODO: overlay this value!
+  k8sServicePort: "" #TODO: overlay this value with your control plane port - commonly: 6443
+  kubeProxyReplacement: true
+  rollOutCiliumPods: true
+
+  operator:
+    replicas: 1
+
+  k8sClientRateLimit:
+    qps: 50
+    burst: 100
+
+  l2announcements:
+    enabled: true
+
+  externalIPs:
+    enabled: true
+
+  envoy:
+    enabled: true
+
+  hubble:
+    ui:
+      enabled: true
+    relay:
+      enabled: true
