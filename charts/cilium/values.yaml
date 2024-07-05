@@ -1,7 +1,3 @@
-enabled:
-  ipPool: false
-  l2announce: false
-
 ipPool:
   - start: "" #TODO: overlay me with your correct subnet
     stop: "" #TODO: overlay me with your correct subnet
