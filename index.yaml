@@ -2,9 +2,9 @@ apiVersion: v1
 entries:
   antennas:
   - apiVersion: v2
-    created: "2024-06-30T13:53:51.579950674Z"
+    created: "2024-07-05T11:55:54.393161967Z"
     description: Deploys antennas the DVR emulator for Plex DVR. Github - https://github.com/jfarseneau/antennas
-    digest: dca8e6a85d8b52c891d227a7883c8ec11820f88aaec7f9ec40b4523d21c976b2
+    digest: 6968035a39d5923be513ee9ad42d85db8b09dd58d5b20b3f4ca570864bc86892
     name: antennas
     urls:
     - https://deB4SH.github.io/helm-charts/antennas-0.0.2.tgz
@@ -17,7 +17,35 @@ entries:
     urls:
     - https://deB4SH.github.io/helm-charts/antennas-0.0.1.tgz
     version: 0.0.1
+  cilium:
+  - apiVersion: v2
+    created: "2024-07-05T11:55:54.403533941Z"
+    dependencies:
+    - name: cilium
+      repository: https://helm.cilium.io/
+      version: 1.15.6
+    description: This Chart deploys cilium with prepared l2 components, envoy and
+      hubble. This is primarly useful for homelab environments.
+    digest: 705a4d15c8535660653612f45b959cccae98ea1408a81433de6bc3b883f53f35
+    name: cilium
+    urls:
+    - https://deB4SH.github.io/helm-charts/cilium-0.0.1.tgz
+    version: 0.0.1
   kanboard:
+  - apiVersion: v2
+    appVersion: v1.2.26
+    created: "2024-07-05T11:55:54.404230406Z"
+    description: Kanban project management software
+    digest: a2e01bbe490a4064e18035a5b792330bd9af00de8683230d78b669f6ca573920
+    home: https://github.com/deB4SH/helm-charts
+    icon: https://avatars.githubusercontent.com/u/13722943
+    name: kanboard
+    sources:
+    - https://github.com/kanboard/kanboard
+    type: application
+    urls:
+    - https://deB4SH.github.io/helm-charts/kanboard-0.0.3.tgz
+    version: 0.0.3
   - apiVersion: v2
     appVersion: v1.2.26
     created: "2024-06-30T13:53:51.580725695Z"
@@ -46,4 +74,4 @@ entries:
     urls:
     - https://deB4SH.github.io/helm-charts/kanboard-0.0.1.tgz
     version: 0.0.1
-generated: "2024-06-30T13:53:51.57955335Z"
+generated: "2024-07-05T11:55:54.392461875Z"
