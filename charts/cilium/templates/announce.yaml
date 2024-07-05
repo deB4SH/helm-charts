@@ -1,4 +1,4 @@
-{{- if .Values.enabled.l2announce }}
+{{- if .Capabilities.APIVersions.Has "cilium.io/v2alpha1" }}
 apiVersion: cilium.io/v2alpha1
 kind: CiliumL2AnnouncementPolicy
 metadata:
