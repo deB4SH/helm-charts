@@ -5,13 +5,13 @@ deployment:
   image:
     location: ghcr.io/kanboard/kanboard
     tag: v1.2.26 
-  resources:
-    limits:
-      cpu: 150m
-      memory: 100Mi
-    requests:
-      cpu: 50m
-      memory: 30Mi
+  resources: {}
+    #limits:
+    #  cpu: 150m
+    #  memory: 100Mi
+    #requests:
+    #  cpu: 50m
+    #  memory: 30Mi
 
 pvc:
   data:
