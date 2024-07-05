@@ -37,4 +37,6 @@ service:
     enabled: true
   loadbalancerIp:
     enabled: false
+    isCilium: false
+    isMetalLb: false
     ip: "127.0.0.1"
