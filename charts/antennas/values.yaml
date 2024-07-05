@@ -16,13 +16,13 @@ deployment:
       cpu: 50m
       memory: 30Mi
   securityContext:
-    capabilities:
-      drop:
-      - ALL
-    readOnlyRootFilesystem: true
-    runAsNonRoot: true
-    runAsUser: 10000
-    runAsGroup: 10000
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 10000
+    # runAsGroup: 10000
     # fsGroup: 20000
 
 ingresses:
