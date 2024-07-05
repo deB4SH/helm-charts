@@ -1,4 +1,4 @@
-{{- if .Value.enabled.ipPool }}
+{{- if .Values.enabled.ipPool }}
 apiVersion: "cilium.io/v2alpha1"
 kind: CiliumLoadBalancerIPPool
 metadata:
@@ -9,4 +9,4 @@ spec:
   - start: {{ .start }}
     stop: {{ .stop }}
   {{- end }}
-{{- end }}
+{{ end }}

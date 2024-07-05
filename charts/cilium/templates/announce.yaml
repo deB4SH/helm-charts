@@ -1,4 +1,4 @@
-{{- if .Value.enabled.l2announce }}
+{{- if .Values.enabled.l2announce }}
 apiVersion: cilium.io/v2alpha1
 kind: CiliumL2AnnouncementPolicy
 metadata:
