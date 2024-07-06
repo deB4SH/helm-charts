@@ -5,7 +5,7 @@ pihole_skip_verify: "true" #default to true, switch when using valid certificate
 external-dns:
 
   crd:
-    create: true
+    create: false
 
   args:
     - --source=service
