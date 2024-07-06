@@ -3,14 +3,9 @@ pihole_password: "" #plain password here - prefer injecting password via externa
 pihole_skip_verify: "true" #default to true, switch when using valid certificates to true
 
 external-dns:
-
-  crd:
-    create: false
-
   args:
     - --source=service
     - --source=ingress
-    - --source=crd
     - --registry=noop
     - --policy=upsert-only
     - --provider=pihole
