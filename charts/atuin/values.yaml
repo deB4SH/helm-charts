@@ -1,0 +1,32 @@
+configuration:
+  dbUsername: "overlay_me"
+  openRegistration: "true"
+  host: "0.0.0.0"
+
+secret:
+  dbUri: "postgres://atuin:seriously-insecure@localhost/atuin"
+  dbPassword: "seriously-insecure"
+
+deployment:
+  image:
+    location: "ghcr.io/atuinsh/atuin"
+    tag: "18.0.0"
+
+pvc:
+  data:
+    accessMode: ReadWriteOnce
+    storageClass: "overlay me"
+    storageSize: 1
+
+service:
+  loadbalancerIp:
+    isMetalLb: false
+    isCilium: false
+    ip: "127.0.0.1"
+
+ingresses:
+  - enabled: false
+    hostname: autin.local.lan
+    ingressClassName: nginx
+    annotations: {}
+      # cert-manager.io/cluster-issuer: selfsigned-issuer

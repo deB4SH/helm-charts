@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Release.Name}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{.Release.Name}}
+  template:
+    metadata:
+      labels:
+        app: {{.Release.Name}}
+      annotations:
+        checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+    spec:
+      containers:
+        - image: {{.Values.deployment.image.location}}:{{.Values.deployment.image.tag}}
+          name: atuin
+          envFrom: 
+          - configMapRef:
+              name: {{.Release.Name}}-configuration
+          - secretRef:
+              name: {{.Release.Name}}-secret-configuration
+          ports:
+            - containerPort: 8888
+          args:
+            - server
+            - start
+          resources:
+            limits:
+              cpu: 250m
+              memory: 1Gi
+            requests:
+              cpu: 50m
+              memory: 500Mi
+          volumeMounts:
+          - mountPath: /config
+            name: data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{.Release.Name}}-data
