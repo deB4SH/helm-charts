@@ -6,7 +6,7 @@ ingresses:
   hubbleui:
     - enabled: false
       hostname: hubble-ui.local.lan
-      ingressClassname: nginx
+      ingressClassName: nginx
       annotations: {}
         # cert-manager.io/cluster-issuer: selfsigned-issuer
 
