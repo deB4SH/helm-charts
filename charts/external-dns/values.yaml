@@ -1,0 +1,20 @@
+pihole_server: "127.0.0.1"
+pihole_password: "" #plain password here - prefer injecting password via external-secrets or sops.
+pihole_skip_verify: "true" #default to true, switch when using valid certificates to true
+
+external-dns:
+
+  crd:
+    create: true
+
+  args:
+    - --source=service
+    - --source=ingress
+    - --source=crd
+    - --registry=noop
+    - --policy=upsert-only
+    - --provider=pihole
+
+  extraEnvVarsCM: "pihole-configuration"
+
+  extraEnvVarsSecret: "pihole-password"
