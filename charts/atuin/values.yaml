@@ -10,7 +10,7 @@ secret:
 deployment:
   image:
     location: "ghcr.io/atuinsh/atuin"
-    tag: "18.0.0"
+    tag: "18.3.0"
 
 pvc:
   data:
