@@ -1,0 +1,59 @@
+deployment:
+  image:
+    location: ghcr.io/deb4sh/ldap-homelab
+    tag: sha-a032f33
+  resources:
+    limits:
+      cpu: 250m
+      memory: 500Mi
+    requests:
+      cpu: 100m
+      memory: 500Mi  
+
+service:
+  loadbalancerIp: 
+    isMetalLb: false
+    isCilium: false
+    ip: "127.0.0.1"
+
+configuration:
+  basedn: "dc=home,dc=lab"
+  groupConfiguration: 
+    # - cn: "testgroup"
+    #   gidNumber: "2000"
+  userConfiguration: []
+    # - cn: "test1"
+    #   uidNumber: "1000"
+    #   gidNumber: "1000"
+    #   givenName: "Test"
+    #   sn: "User"
+    #   mail: "test@user.tld"
+    #   userPassword: "{SSHA}h4Pu"
+    # - cn: "test2"
+    #   uidNumber: "1001"
+    #   gidNumber: "1001"
+    #   givenName: "Random"
+    #   sn: "Dude"
+    #   mail: "random@dude.tld"
+    #   userPassword: "{SSHA}1234nopasswd"
+  serviceUserConfiguration: []
+    # - cn: "test1"
+    #   uidNumber: "1000"
+    #   gidNumber: "1000"
+    #   givenName: "Test"
+    #   sn: "User"
+    #   mail: "test@user.tld"
+    #   userPassword: "{SSHA}h4Pu"
+    # - cn: "test2"
+    #   uidNumber: "1001"
+    #   gidNumber: "1001"
+    #   givenName: "Random"
+    #   sn: "Dude"
+    #   mail: "random@dude.tld"
+    #   userPassword: "{SSHA}1234nopasswd"
+  userMemberOf: []
+    # - userCn: "test1"
+    #   groupName: "testgroup"
+  groupMemberCn: []
+    # - userCn: "test1"
+    #   groupName: "testgroup"

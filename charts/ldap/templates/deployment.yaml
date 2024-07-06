@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ldap
+  labels:
+    app: ldap
+spec:
+  strategy:
+    type: RollingUpdate
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: ldap
+  template:
+    metadata:
+      labels:
+        app: ldap
+      annotations:
+        checksum/users: {{ include (print $.Template.BasePath "/configuration/user.yaml") . | sha256sum }}
+        checksum/serviceusers: {{ include (print $.Template.BasePath "/configuration/serviceUser.yaml") . | sha256sum }}
+        checksum/groups: {{ include (print $.Template.BasePath "/configuration/groups.yaml") . | sha256sum }}
+        checksum/userMemberOf: {{ include (print $.Template.BasePath "/configuration/userMemberOf.yaml") . | sha256sum }}
+        checksum/groupMemberUid: {{ include (print $.Template.BasePath "/configuration/groupMemberUid.yaml") . | sha256sum }}
+    spec:
+      containers:
+        - name: ldap
+          image: {{.Values.deployment.image.location}}:{{.Values.deployment.image.tag}}
+          imagePullPolicy: IfNotPresent
+          resources: 
+            {{- toYaml .Values.deployment.resources | nindent 12 }}
+          ports:
+            - name: ldap
+              containerPort: 389
+            - name: ldaps
+              containerPort: 636
+          volumeMounts:
+            - name: users
+              mountPath: /root/02_users/users
+            - name: serviceusers
+              mountPath: /root/02_users/serviceusers
+            - name: groups
+              mountPath: /root/01_groups
+            - name: usermemberof
+              mountPath: /root/03_user_groups/userMemberof
+            - name: groupsmemberuid
+              mountPath: /root/03_user_groups/ldap-groupMemberId
+      volumes:
+        - name: users
+          configMap:
+            name: ldap-users
+        - name: serviceusers
+          configMap:
+            name: ldap-service-users
+        - name: groups
+          configMap:
+            name: ldap-groups
+        - name: usermemberof
+          configMap:
+            name: ldap-usermemberof
+        - name: groupsmemberuid
+          configMap:
+            name: ldap-groupmemberid

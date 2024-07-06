@@ -1,0 +1,27 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ldap-loadbalancer
+  annotations:
+    {{- if .Values.service.loadbalancerIp.isMetalLb}}
+    metallb.universe.tf/loadBalancerIPs: {{.Values.service.loadbalancerIp.ip}}
+    metallb.universe.tf/allow-shared-ip: antennas
+    {{- end}}
+    {{- if .Values.service.loadbalancerIp.isCilium}}
+    io.cilium/lb-ipam-ips: {{.Values.service.loadbalancerIp.ip}}
+    io.cilium/lb-ipam-sharing-key: antennas
+    {{- end}}
+spec:
+  type: LoadBalancer
+  ports:
+    - name: ldap
+      protocol: TCP
+      port: 389
+      targetPort: 389
+    - name: ldaps
+      protocol: TCP
+      port: 636
+      targetPort: 636
+  selector:
+    app: ldap
+  

@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  {{- range .Values.configuration.userMemberOf }}
+    userMemberOf_{{ .userCn }}_{{ .groupName }}.ldif: |
+        dn: cn={{.userCn}},ou=users,{{ $.Values.configuration.basedn }}
+        changetype: modify
+        add: memberOf
+        memberOf: cn={{ .groupName }},ou=groups,{{ $.Values.configuration.basedn }}{{end}}
+kind: ConfigMap
+metadata:
+  name: ldap-usermemberof

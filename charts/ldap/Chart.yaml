@@ -1,0 +1,4 @@
+apiVersion: v2
+name: ldap
+version: 1.0.0
+description: This Chart deploys https://github.com/deB4SH/LDAP-Homelab with configurable users and groups.

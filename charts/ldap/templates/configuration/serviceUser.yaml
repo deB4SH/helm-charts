@@ -1,0 +1,28 @@
+apiVersion: v1
+data:
+  {{- range .Values.configuration.serviceUserConfiguration }}
+    user_{{ .uidNumber }}.ldif: |
+        dn: cn={{ .cn }},ou=svcusers,{{ $.Values.configuration.basedn }}
+        changetype: add
+        objectClass: top
+        objectClass: posixAccount
+        objectClass: shadowAccount
+        objectClass: person
+        objectClass: organizationalPerson
+        objectClass: inetOrgPerson
+        cn: {{ .cn }}
+        uid: {{ .cn }}
+        gecos: {{ .cn }}
+        uidNumber: {{ .uidNumber }}
+        gidNumber: {{ .gidNumber }}
+        givenName: {{ .givenName }}
+        sn: {{ .sn }}
+        sAMAccountName: {{ .cn }}
+        displayName: {{ .givenName }} {{ .sn }}
+        mail: {{ .mail }}
+        homeDirectory: /home/{{ .sn }}
+        loginshell: /bin/bash
+        userPassword: {{ .userPassword}} {{end}}
+kind: ConfigMap
+metadata:
+  name: ldap-service-users

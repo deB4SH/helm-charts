@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  {{- range .Values.configuration.groupMemberCn }}
+    groupMemberCn_{{ .userCn }}_{{ .groupName }}.ldif: |
+        dn: cn={{ .groupName }},ou=groups,{{ $.Values.configuration.basedn }}
+        changetype: modify
+        add: memberUid
+        memberUid: {{ .userCn }}{{end}}
+kind: ConfigMap
+metadata:
+  name: ldap-groupmemberid
