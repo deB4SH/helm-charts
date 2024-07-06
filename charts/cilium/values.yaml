@@ -2,6 +2,15 @@ ipPool:
   - start: "" #TODO: overlay me with your correct subnet
     stop: "" #TODO: overlay me with your correct subnet
 
+ingresses:
+  hubbleui:
+    - enabled: false
+      hostname: hubble-ui.local.lan
+      ingressClassname: nginx
+      annotations: {}
+        # cert-manager.io/cluster-issuer: selfsigned-issuer
+
+
 cilium:
   k8sServiceHost: "" #TODO: overlay this value!
   k8sServicePort: "" #TODO: overlay this value with your control plane port - commonly: 6443

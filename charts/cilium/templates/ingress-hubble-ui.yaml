@@ -1,0 +1,30 @@
+{{- range .Values.ingresses.hubbleui }}
+{{- if .enabled }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hubbleui-ingress-{{ .hostname | replace "." "-"}}
+  annotations:
+    {{- range $key, $val := .annotations }}
+    {{ $key }}: "{{ $val }}"
+    {{- end }}
+spec:
+  ingressClassName:  {{ .ingressClassName }}
+  tls:
+    - hosts:
+        - {{ .hostname }}
+      secretName: {{ .hostname }}
+  rules:
+    - host: {{ .hostname }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hubble-ui
+                port:
+                  number: 80
+{{ end }}
+{{ end }}
