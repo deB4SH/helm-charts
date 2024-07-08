@@ -10,4 +10,4 @@ open-webui:
   ollama:
     enabled: false
   pipelines:
-    enabled: true
+    enabled: false
