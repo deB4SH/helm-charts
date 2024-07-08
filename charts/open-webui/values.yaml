@@ -1,0 +1,13 @@
+ingresses:
+  - enabled: false
+    hostname: openwebui.local.lan
+    ingressClassName: nginx
+    annotations: {}
+      # cert-manager.io/cluster-issuer: selfsigned-issuer
+
+
+open-webui:
+  ollama:
+    enabled: false
+  pipelines:
+    enabled: true

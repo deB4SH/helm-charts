@@ -1,0 +1,8 @@
+apiVersion: v2
+name: open-webui
+version: 0.0.1
+description: This Chart deploys open-webui with preconfigured values.
+dependencies:
+  - name: open-webui
+    version: 3.0.5
+    repository: https://helm.openwebui.com/
