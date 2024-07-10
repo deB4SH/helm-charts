@@ -1,0 +1,32 @@
+deployment:
+  #sleepstart is useful when you want to recreate a configuration within the pod - default should be "false"
+  sleepStart: false
+  image:
+    location: ghcr.io/element-hq/synapse
+    tag: v1.110.0
+  resources: {}
+    # limits:
+    #   cpu: 500m
+    #   memory: 1000Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 500Mi
+
+pvc:
+  data:
+    accessMode: ReadWriteMany
+    storageClass: #only applied when set
+    storageSize: 5 #size in Gi
+
+service: 
+  loadbalancerIp:
+    ip: 127.0.0.1
+
+configuration:
+  serverName: "overlay_me"
+  reportStats: "true"
+  configPath: "/config/homeserver.yaml"
+  unsafeLocale: "true"
+
+homeserverConfiguration: |-
+  "overlay_me"

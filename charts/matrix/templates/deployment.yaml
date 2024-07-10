@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: matrix
+  labels:
+    app: matrix
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  progressDeadlineSeconds: 600
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: matrix
+  template:
+    metadata:
+      labels:
+        app: matrix
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/homeserverConfig: {{ include (print $.Template.BasePath "/configmap-homeserver.yaml") . | sha256sum }}
+    spec:
+      containers:
+        - name: matrix
+          image: {{ .Values.deployment.image.location }}:{{ .Values.deployment.image.tag }}
+          imagePullPolicy: IfNotPresent
+          {{ if .Values.deployment.sleepStart }}
+          # Just spin & wait forever
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "while true; do sleep 30; done;" ]
+          {{ end }}
+          envFrom:
+            - configMapRef:
+                name: matrix-configuration
+          resources:
+            {{- toYaml .Values.deployment.resources | nindent 12 }}
+          ports:
+            - containerPort: 8008
+              name: matrix
+            - containerPort: 9000
+              name: metrics
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: config
+              mountPath: /config
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: matrix-data
+        - name: config
+          configMap:
+            name: matrix-configuration-homeserver
+        

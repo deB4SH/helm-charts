@@ -1,0 +1,25 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: matrix-lb
+  annotations:
+    {{- if .Values.service.loadbalancerIp.isMetalLb}}
+    metallb.universe.tf/loadBalancerIPs: {{.Values.service.loadbalancerIp.ip}}
+    metallb.universe.tf/allow-shared-ip: antennas
+    {{- end}}
+    {{- if .Values.service.loadbalancerIp.isCilium}}
+    io.cilium/lb-ipam-ips: {{.Values.service.loadbalancerIp.ip}}
+    io.cilium/lb-ipam-sharing-key: antennas
+    {{- end}}
+spec:
+  type: LoadBalancer
+  selector:
+    app: matrix
+  ports:
+    - name: matrix
+      port: 8008
+      targetPort: 8008
+    - name: metrics
+      port: 9000
+      targetPort: 9000
+  

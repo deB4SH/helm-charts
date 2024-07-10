@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: matrix-clusterip
+spec:
+  type: ClusterIP
+  selector:
+    app: matrix
+  ports:
+    - name: matrix
+      port: 8008
+      targetPort: 8008
+    - name: metrics
+      port: 9000
+      targetPort: 9000

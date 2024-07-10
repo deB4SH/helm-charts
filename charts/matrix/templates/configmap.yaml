@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: matrix-configuration
+data:
+  SYNAPSE_SERVER_NAME: "{{.Values.configuration.serverName}}"
+  SYNAPSE_REPORT_STATS: "{{.Values.configuration.reportStats}}"
+  SYNAPSE_CONFIG_PATH: "{{.Values.configuration.configPath}}"
+  ALLOW_UNSAFE_LOCALE: "{{.Values.configuration.unsafeLocale}}"
+  UID: "1000"
+  GID: "1000"
