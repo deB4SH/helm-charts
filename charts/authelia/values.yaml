@@ -5,7 +5,7 @@ service:
 
 authelia:
   rbac:
-    enabled: true
+    enabled: false
 
   pod:
     kind: Deployment
