@@ -1,0 +1,45 @@
+service: 
+  loadbalancerIp:
+    enabled: false
+    ip: 127.0.0.1
+
+authelia:
+  rbac:
+    enabled: true
+
+  pod:
+    kind: Deployment
+    securityContext:
+      container: 
+        runAsUser: 2000
+        runAsGroup: 2000
+        fsGroup: 2000
+      pod: 
+        readOnlyRootFilesystem: true
+        allowPrivilegeEscalation: false
+        privileged: false
+    resources:
+      limits:
+        cpu: "0.50"
+        memory: 125Mi
+      requests: 
+        cpu: "0.25"
+        memory: 50Mi
+
+  configMap:
+    telemetry:
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: false
+    session:
+      redis:
+        enabled: false
+    storage:
+      local:
+        enabled: true
+        path: /config/db.sqlite3
+      mysql:
+        enabled: false
+      postgres:
+        enabled: false
