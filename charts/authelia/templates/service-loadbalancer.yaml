@@ -20,4 +20,4 @@ spec:
       port: 80
       protocol: TCP
       targetPort: http
-  
+{{- end }}
