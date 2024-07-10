@@ -1,3 +1,6 @@
+middleware:
+  redirectschema: false
+
 traefik: 
   providers:
     kubernetesIngress:

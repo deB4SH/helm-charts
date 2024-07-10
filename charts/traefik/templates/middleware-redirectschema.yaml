@@ -1,0 +1,10 @@
+{{- if .Values.middleware.redirectschema }}
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirectscheme
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+{{- end }}
