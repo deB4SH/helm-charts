@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{lower .Release.Name}}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  strategy:
+    type: {{.Values.deployment.strategy.type}}
+  selector:
+    matchLabels:
+      app: {{lower .Release.Name}}
+  template:
+    metadata:
+      labels:
+        app: {{lower .Release.Name}}
+      name: {{lower .Release.Name}}
+      annotations:
+        checksum/configuration: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    spec:
+      containers:
+        - image: {{ .Values.deployment.image.location }}:{{ .Values.deployment.image.tag }}
+          imagePullPolicy: IfNotPresent
+          name: rss
+          {{ if .Values.deployment.sleepStart }}
+          # Just spin & wait forever
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "while true; do sleep 30; done;" ]
+          {{ end }}
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+          env:
+            - name: APP_NAME
+              value: "{{.Values.configuration.appName}}"
+          resources: 
+            {{- toYaml .Values.deployment.resources | nindent 12 }}
+          volumeMounts:
+            - name: storage
+              mountPath: /app/storage
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: {{ .Values.deployment.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.deployment.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.deployment.livenessProbe.timeoutSeconds }}
+      initContainers:
+        - name: copy
+          image: alpine:latest
+          volumeMounts:
+            - name: storage
+              mountPath: /tmp/storage
+            - name: feeds
+              mountPath: /tmp/feed/
+          command: [/bin/sh, -c]
+          args:
+            - |
+              echo "copy feeds.txt from configmap to storage pvc"
+              cp /tmp/feed/feeds.txt /tmp/storage/feeds.txt
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: {{lower .Release.Name}}-storage
+        - name: feeds
+          configMap:
+            name: {{lower .Release.Name}}-feeds

@@ -1,0 +1,55 @@
+deployment:
+  sleepStart: false
+  image:
+    location: "ghcr.io/ssddanbrown/rss"
+    tag: "v1.5.0"
+  strategy:
+    type: RollingUpdate
+  livenessProbe:
+    initialDelaySeconds: 60
+    periodSeconds: 15
+    timeoutSeconds: 5
+  resources:
+    limits:
+      cpu: 150m
+      memory: 100Mi
+    requests:
+      cpu: 50m
+      memory: 30Mi
+
+pvc:
+  storage:
+    accessMode: ReadWriteMany
+    storageClass: #only applied when set
+    storageSize: 5 #size in Gi
+
+configuration:
+  appName: "RSS"
+  feeds: |
+    https://feed.url.com/feed.xml feed-name #tag-a #tag-b
+    https://example.com/feed.xml Example #updates #news
+
+    # Lines starting with a hash are considered comments.
+    # Empty lines are fine and will be ignored.
+
+    # Underscores in names will be converted to spaces.
+    https://example.com/feed-b.xml News_Site #news
+
+    # Feed color can be set using square brackets after the name.
+    # The color must be a CSS-compatible color value.
+    https://example.com/feed-c.xml Blue_News[#0078b9] #news #blue
+
+    # Feeds starting with a '-' are flagged as hidden.
+    # Posts for hidden feeds won't be shown on the homepage
+    # but can be seen via any type of active filter.
+    - https://example.com/feed-d.xml Cat_Facts #cats #facts
+
+ingress:
+  hostname: rss.lan
+  issuer: selfsigned-ca-issuer
+  ingressClass: traefik
+
+service:
+  loadbalancerIp: 
+    ip: "127.0.0.1"
+    externalTrafficPolicy: "Local"
