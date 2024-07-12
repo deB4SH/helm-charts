@@ -14,6 +14,7 @@ metadata:
     {{- end}}
 spec:
   type: LoadBalancer
+  externalTrafficPolicy: {{ .Values.service.loadbalancer.externalTrafficPolicy }}
   selector: {{- include "authelia.matchLabels" . | nindent 4 }}
   ports:
     - name: http
