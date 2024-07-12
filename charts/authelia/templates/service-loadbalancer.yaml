@@ -1,15 +1,15 @@
-{{- if .Values.service.loadbalancerIp.enabled }}
+{{- if .Values.service.loadbalancer.enabled }}
 kind: Service
 apiVersion: v1
 metadata:
   name: authelia-loadbalancer
   annotations:
-    {{- if .Values.service.loadbalancerIp.isMetalLb}}
-    metallb.universe.tf/loadBalancerIPs: {{.Values.service.loadbalancerIp.ip}}
+    {{- if .Values.service.loadbalancer.isMetalLb}}
+    metallb.universe.tf/loadBalancerIPs: {{.Values.service.loadbalancer.ip}}
     metallb.universe.tf/allow-shared-ip: authelia
     {{- end}}
-    {{- if .Values.service.loadbalancerIp.isCilium}}
-    io.cilium/lb-ipam-ips: {{.Values.service.loadbalancerIp.ip}}
+    {{- if .Values.service.loadbalancer.isCilium}}
+    io.cilium/lb-ipam-ips: {{.Values.service.loadbalancer.ip}}
     io.cilium/lb-ipam-sharing-key: authelia
     {{- end}}
 spec:
