@@ -9,13 +9,13 @@ deployment:
     initialDelaySeconds: 60
     periodSeconds: 15
     timeoutSeconds: 5
-  resources:
-    limits:
-      cpu: 150m
-      memory: 100Mi
-    requests:
-      cpu: 50m
-      memory: 30Mi
+  resources: {}
+    # limits:
+    #   cpu: 150m
+    #   memory: 100Mi
+    # requests:
+    #   cpu: 50m
+    #   memory: 30Mi
 
 pvc:
   storage:
