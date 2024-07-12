@@ -52,6 +52,6 @@ ingresses:
       # cert-manager.io/cluster-issuer: selfsigned-issuer
 
 service:
-  loadbalancerIp: 
+  loadbalancer: 
     ip: "127.0.0.1"
     externalTrafficPolicy: "Local"

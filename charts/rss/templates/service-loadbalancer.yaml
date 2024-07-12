@@ -3,12 +3,12 @@ apiVersion: v1
 metadata:
   name: {{lower .Release.Name}}-loadbalancer
   annotations:
-    {{- if .Values.service.loadbalancerIp.isMetalLb}}
-    metallb.universe.tf/loadBalancerIPs: {{.Values.service.loadbalancerIp.ip}}
+    {{- if .Values.service.loadbalancer.isMetalLb}}
+    metallb.universe.tf/loadBalancerIPs: {{.Values.service.loadbalancer.ip}}
     metallb.universe.tf/allow-shared-ip: antennas
     {{- end}}
-    {{- if .Values.service.loadbalancerIp.isCilium}}
-    io.cilium/lb-ipam-ips: {{.Values.service.loadbalancerIp.ip}}
+    {{- if .Values.service.loadbalancer.isCilium}}
+    io.cilium/lb-ipam-ips: {{.Values.service.loadbalancer.ip}}
     io.cilium/lb-ipam-sharing-key: antennas
     {{- end}}
 spec:
@@ -19,5 +19,5 @@ spec:
       targetPort: 80
   selector:
     app: {{lower .Release.Name}}
-  externalTrafficPolicy: {{ .Values.service.loadbalancerIp.externalTrafficPolicy }}
+  externalTrafficPolicy: {{ .Values.service.loadbalancer.externalTrafficPolicy }}
   type: LoadBalancer
