@@ -44,10 +44,12 @@ configuration:
     # but can be seen via any type of active filter.
     - https://example.com/feed-d.xml Cat_Facts #cats #facts
 
-ingress:
-  hostname: rss.lan
-  issuer: selfsigned-ca-issuer
-  ingressClass: traefik
+ingresses:
+  - enabled: false
+    hostname: rss.local.lan
+    ingressClassName: nginx
+    annotations: {}
+      # cert-manager.io/cluster-issuer: selfsigned-issuer
 
 service:
   loadbalancerIp: 
