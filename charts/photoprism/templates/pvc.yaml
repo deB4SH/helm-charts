@@ -5,6 +5,8 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: {{lower $.Release.Name}}-{{.name}}
+  labels:
+    isSmb: true
 stringData:
   password: {{.smbPassword}}
   username: {{.smbUsername}}
@@ -14,6 +16,8 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: {{lower $.Release.Name}}-{{.name}}
+  labels:
+    isSmb: true
 spec:
   accessModes:
     - ReadWriteOnce
@@ -33,7 +37,6 @@ spec:
     nodeStageSecretRef:
       name: {{lower $.Release.Name}}-{{.name}}
       namespace: {{$.Release.Namespace}}
-
 {{end}}
 {{if .isNFS}}
 ---
@@ -41,12 +44,14 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: {{lower $.Release.Name}}-{{.name}}
+  labels:
+    isNFS: true
 spec:
   capacity:
     storage: {{.size}}Gi
   volumeMode: Filesystem
   accessModes:
-    - ReadWriteOnce
+    - {{ .accessMode }}
   persistentVolumeReclaimPolicy: Recycle
   storageClassName: nfs
   mountOptions:
@@ -55,18 +60,6 @@ spec:
   nfs:
     path: {{.path}}
     server: {{.server}}
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: {{lower $.Release.Name}}-{{.name}}
-spec:
-  storageClassName: nfs
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: {{.size}}Gi
 {{end}}
 ---
 apiVersion: v1
@@ -76,13 +69,16 @@ metadata:
 spec:
   accessModes:
     - {{ .accessMode }}
-  {{ if .storageClass }}
+  {{- if .storageClass }}
   storageClassName: {{ .storageClass }}
-  {{ end}}
-  {{ if .isSmb }}
+  {{- end}}
+  {{- if .isNFS }}
+  storageClassName: nfs
+  {{- end}}
+  {{- if .isSmb }}
   volumeName: {{lower $.Release.Name}}-{{.name}}
   storageClassName: ""
-  {{ end}}
+  {{- end}}
   resources:
     requests:
       storage: {{ .size }}Gi
