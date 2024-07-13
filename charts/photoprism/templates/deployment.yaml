@@ -24,13 +24,8 @@ spec:
           imagePullPolicy: IfNotPresent
           name: {{ lower .Release.Name}}
           {{ if .Values.deployment.resources.enabled}}
-          resources:
-            limits:
-              cpu: {{ .Values.deployment.resources.limits.cpu}}m
-              memory: {{ .Values.deployment.resources.limits.memory}}Mi
-            requests:
-              cpu: {{ .Values.deployment.resources.requests.cpu}}m
-              memory: {{ .Values.deployment.resources.requests.memory}}Mi
+          resources: 
+            {{- toYaml .Values.deployment.resources | nindent 12 }}
           {{end}}
           envFrom:
             - configMapRef:

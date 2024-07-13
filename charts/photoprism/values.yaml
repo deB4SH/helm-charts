@@ -3,13 +3,12 @@ deployment:
     location: "photoprism/photoprism"
     tag: "240711-ce"
   resources:
-    enabled: true
     limits:
-      cpu: 1000
-      memory: 3000
+      cpu: 1000m
+      memory: 3000Mi
     requests:
-      cpu: 500
-      memory: 3000
+      cpu: 500m
+      memory: 3000Mi
 
 environment:
   photoprismSiteTitle: "overlay_me"
