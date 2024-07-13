@@ -34,15 +34,19 @@ environment:
   photoprismAdminPassword: "overlay_me"
 
 pvc: 
+  #example for default storage class pvc
   - name: configuration
     isSmb: false
+    isNFS: false
     accessMode: ReadWriteOnce
     storageClass: 
     size: 1
     mountPoint: /smb/storage
     isReadOnly: false
+  #example for smb mounted pvc
   - name: dvr
     isSmb: true
+    isNFS: false
     smbSource: "//127.0.0.1/photography"
     smbUsername: "overlayme"
     smbPassword: "overlayme"
@@ -50,6 +54,15 @@ pvc:
     size: 200
     mountPoint: /dvr
     isReadOnly: false
+  #example for nfs mounted pvc
+  - name: images
+    isSmb: false
+    isNFS: true
+    size: 200
+    path: /opt/k8s-pods/data
+    server: 127.0.0.1
+    mountPoint: /images
+    isReadOnly: true
 
 ingresses:
   - enabled: false

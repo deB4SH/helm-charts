@@ -35,6 +35,27 @@ spec:
       namespace: {{$.Release.Namespace}}
 
 {{end}}
+{{if .isNFS}}
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{lower $.Release.Name}}-{{.name}}
+spec:
+  capacity:
+    storage: {{.size}}Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: nfs
+  mountOptions:
+    - hard
+    - nfsvers=4.1
+  nfs:
+    path: {{.path}}
+    server: {{.server}}
+{{end}}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
