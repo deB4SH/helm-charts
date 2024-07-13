@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ lower .Release.Name}}
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: {{ lower .Release.Name}}
+  template:
+    metadata:
+      labels:
+        app: {{ lower .Release.Name}}
+      annotations:
+        checksum/configuration: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+      name: {{ lower .Release.Name}}
+    spec:
+      containers:
+        - image: {{ .Values.deployment.image.location }}:{{ .Values.deployment.image.tag }}
+          imagePullPolicy: IfNotPresent
+          name: {{ lower .Release.Name}}
+          {{ if .Values.deployment.resources.enabled}}
+          resources:
+            limits:
+              cpu: {{ .Values.deployment.resources.limits.cpu}}m
+              memory: {{ .Values.deployment.resources.limits.memory}}Mi
+            requests:
+              cpu: {{ .Values.deployment.resources.requests.cpu}}m
+              memory: {{ .Values.deployment.resources.requests.memory}}Mi
+          {{end}}
+          envFrom:
+            - configMapRef:
+                name: {{ lower .Release.Name}}-environment
+            - secretRef:
+                name: {{ lower .Release.Name}}-secret
+          ports:
+            - containerPort: 2342
+              name: http
+          volumeMounts:
+            {{- range .Values.pvc -}} {{ printf "\n" }}
+            - name: {{lower $.Release.Name}}-{{.name}}
+              mountPath: {{.mountPoint}}
+              {{if .isReadOnly}}
+              readOnly: {{.isReadOnly}} {{end}}
+            {{end}}
+      volumes:
+        {{- range .Values.pvc -}} {{ printf "\n" }}
+        - name: {{lower $.Release.Name}}-{{.name}}
+          persistentVolumeClaim:
+            claimName: {{lower $.Release.Name}}-{{.name}}
+        {{end}}

@@ -1,0 +1,30 @@
+{{- range .Values.ingresses }}
+{{- if .enabled }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: photoprism-{{ .hostname | replace "." "-"}}
+  annotations:
+    {{- range $key, $val := .annotations }}
+    {{ $key }}: "{{ $val }}"
+    {{- end }}
+spec:
+  ingressClassName:  {{ .ingressClassName }}
+  tls:
+    - hosts:
+        - {{ .hostname }}
+      secretName: {{ .hostname }}
+  rules:
+    - host: {{ .hostname }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{lower $.Release.Name}}-clusterip
+                port:
+                  number: 8888
+{{ end }}
+{{ end }}

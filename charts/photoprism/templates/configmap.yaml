@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{lower .Release.Name}}-environment
+data:
+  #GENERAL
+  GID: "1000"
+  TZ: "UTC"
+  #PHOTOPRISM GENERAL
+  PHOTOPRISM_SITE_TITLE: "{{ .Values.environment.photoprismSiteTitle }}"
+  PHOTOPRISM_SITE_CAPTION: "{{ .Values.environment.photoprismSiteCaption }}"
+  PHOTOPRISM_SITE_DESCRIPTION: "{{ .Values.environment.photoprismSiteDescription }}"
+  PHOTOPRISM_SITE_AUTHOR: "{{ .Values.environment.photoprismSiteAuthor }}"
+  PHOTOPRISM_SITE_URL: "{{ .Values.environment.photoprismSiteUrl }}"
+  PHOTOPRISM_HTTP_COMPRESSION: "{{ .Values.environment.photoprismHttpCompression }}"
+  #DATABSE
+  PHOTOPRISM_DATABASE_DRIVER: "{{ .Values.environment.photoprismDatabaseDriver }}"
+  PHOTOPRISM_DATABASE_SERVER: "{{ .Values.environment.photoprismDatabaseServer }}"
+  PHOTOPRISM_DATABASE_NAME: "{{ .Values.environment.photoprismDatabaseName }}"
+  PHOTOPRISM_DATABASE_USER: "{{ .Values.environment.photoprismDatabaseUser }}"
+  PHOTOPRISM_DATABASE_PASSWORD: "{{ .Values.environment.photoprismDatabasePassword }}"
+  PHOTOPRISM_HTTP_HOST: "{{ .Values.environment.photoprismHttpHost }}"
+  PHOTOPRISM_HTTP_PORT: "{{ .Values.environment.photoprismHttpPort }}"
+  #IMAGE RELATED
+  PHOTOPRISM_ORIGINALS_PATH: "{{ .Values.environment.photoprismOriginalsPath }}"
+  PHOTOPRISM_PUBLIC: "{{ .Values.environment.photoprismPublic }}"
+  PHOTOPRISM_STORAGE_PATH: "{{ .Values.environment.photoprismStoragePath }}"
+  PHOTOPRISM_ORIGINALS_LIMIT: "{{ .Values.environment.photoprismOriginalsLimit }}"
+  PHOTOPRISM_READONLY: "{{ .Values.environment.photoprismReadonly }}"
+  PHOTOPRISM_AUTH_MODE: "{{ .Values.environment.photoprismAuthMode }}"

@@ -1,0 +1,66 @@
+deployment:
+  image:
+    location: "photoprism/photoprism"
+    tag: "240711-ce"
+  resources:
+    enabled: true
+    limits:
+      cpu: 1000
+      memory: 3000
+    requests:
+      cpu: 500
+      memory: 3000
+
+environment:
+  photoprismSiteTitle: "overlay_me"
+  photoprismSiteCaption: "overlay_me"
+  photoprismSiteDescription: "overlay_me"
+  photoprismSiteAuthor: "overlay_me"
+  photoprismSiteUrl: "overlay_me"
+  photoprismHttpCompression: "gzip"
+  photoprismDatabaseDriver: "mysql"
+  photoprismDatabaseServer: "127.0.0.1:3306"
+  photoprismDatabaseName: "photoprism"
+  photoprismDatabaseUser: "photoprism"
+  photoprismDatabasePassword: "photoprism"
+  photoprismHttpHost: "0.0.0.0"
+  photoprismHttpPort: "2342"
+  photoprismOriginalsPath: "/tmp/overlay_me"
+  photoprismPublic: "false"
+  photoprismStoragePath: "/smb/storage"
+  photoprismOriginalsLimit:  "4000"
+  photoprismReadonly: "true"
+  photoprismAuthMode: "password"
+  photoprismAdminUser: "overlay_me"
+  photoprismAdminPassword: "overlay_me"
+
+pvc: 
+  - name: configuration
+    isSmb: false
+    accessMode: ReadWriteOnce
+    storageClass: 
+    size: 1
+    mountPoint: /smb/storage
+    isReadOnly: false
+  - name: dvr
+    isSmb: true
+    smbSource: "//127.0.0.1/photography"
+    smbUsername: "overlayme"
+    smbPassword: "overlayme"
+    accessMode: ReadWriteOnce
+    size: 200
+    mountPoint: /dvr
+    isReadOnly: false
+
+ingresses:
+  - enabled: false
+    hostname: photoprism.local.lan
+    ingressClassName: nginx
+    annotations: {}
+      # cert-manager.io/cluster-issuer: selfsigned-issuer
+
+service:
+  loadbalancer:
+    enabled: false
+    externalTrafficPolicy: "Local"
+    ip: "127.0.0.1"

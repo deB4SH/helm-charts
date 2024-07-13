@@ -1,0 +1,56 @@
+{{- range .Values.pvc -}}
+{{if .isSmb}}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{lower $.Release.Name}}-{{.name}}
+stringData:
+  password: {{.smbPassword}}
+  username: {{.smbUsername}}
+type: Opaque
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{lower $.Release.Name}}-{{.name}}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  capacity:
+    storage: {{.size}}Gi
+  mountOptions:
+    - dir_mode=0644
+    - file_mode=0644
+    - vers=3.0
+  csi:
+    driver: smb.csi.k8s.io
+    readOnly: true
+    volumeHandle: {{$.Release.Name}}-{{.name}} # make sure it's a unique id in the cluster
+    volumeAttributes:
+      source: "{{.smbSource}}"
+    nodeStageSecretRef:
+      name: {{lower $.Release.Name}}-{{.name}}
+      namespace: {{$.Release.Namespace}}
+
+{{end}}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{$.Release.Name}}-{{.name}}
+spec:
+  accessModes:
+    - {{ .accessMode }}
+  {{ if .storageClass }}
+  storageClassName: {{ .storageClass }}
+  {{ end}}
+  {{ if .isSmb }}
+  volumeName: {{lower $.Release.Name}}-{{.name}}
+  storageClassName: ""
+  {{ end}}
+  resources:
+    requests:
+      storage: {{ .size }}Gi
+{{end}}
