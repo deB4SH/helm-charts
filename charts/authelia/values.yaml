@@ -2,6 +2,7 @@ service:
   loadbalancer:
     enabled: false
     ip: 127.0.0.1
+    externalTrafficPolicy: "Local"
 
 authelia:
   rbac:

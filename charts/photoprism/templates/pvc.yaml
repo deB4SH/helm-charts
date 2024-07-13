@@ -46,7 +46,7 @@ spec:
     storage: {{.size}}Gi
   volumeMode: Filesystem
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   persistentVolumeReclaimPolicy: Recycle
   storageClassName: nfs
   mountOptions:
