@@ -55,6 +55,18 @@ spec:
   nfs:
     path: {{.path}}
     server: {{.server}}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{lower $.Release.Name}}-{{.name}}
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{.size}}Gi
 {{end}}
 ---
 apiVersion: v1
