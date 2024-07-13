@@ -61,6 +61,7 @@ pvc:
     size: 200
     path: /opt/k8s-pods/data
     server: 127.0.0.1
+    nfsvers: 4.1
     mountPoint: /images
     isReadOnly: true
     accessMode: ReadWriteOnce

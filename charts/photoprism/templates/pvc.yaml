@@ -50,7 +50,7 @@ spec:
   storageClassName: nfs
   mountOptions:
     - hard
-    - nfsvers=4.1
+    - nfsvers={{.nfsvers}}
   nfs:
     path: {{.path}}
     server: {{.server}}
