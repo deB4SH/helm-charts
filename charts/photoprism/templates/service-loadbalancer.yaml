@@ -3,13 +3,13 @@ apiVersion: v1
 metadata:
   name: {{lower .Release.Name}}-loadbalancer
   annotations:
-    {{- if .Values.service.loadbalancerIp.isMetalLb}}
-    metallb.universe.tf/loadBalancerIPs: {{.Values.service.loadbalancerIp.ip}}
-    metallb.universe.tf/allow-shared-ip: atuin
+    {{- if .Values.service.loadbalancer.isMetalLb}}
+    metallb.universe.tf/loadBalancerIPs: {{.Values.service.loadbalancer.ip}}
+    metallb.universe.tf/allow-shared-ip: photoprism
     {{- end}}
-    {{- if .Values.service.loadbalancerIp.isCilium}}
-    io.cilium/lb-ipam-ips: {{.Values.service.loadbalancerIp.ip}}
-    io.cilium/lb-ipam-sharing-key: atuin
+    {{- if .Values.service.loadbalancer.isCilium}}
+    io.cilium/lb-ipam-ips: {{.Values.service.loadbalancer.ip}}
+    io.cilium/lb-ipam-sharing-key: photoprism
     {{- end}}
 spec:
   ports:
