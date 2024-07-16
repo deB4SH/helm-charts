@@ -1,0 +1,43 @@
+deployment:
+  sleepStart: false
+  image:
+    location: vaultwarden/server
+    tag: 1.31.0
+  resources:
+    limits:
+      cpu: 300
+      memory: 1500
+    requests:
+      cpu: 100
+      memory: 1000
+
+pvc:
+  data:
+    accessMode: ReadWriteMany
+    #only applied when set
+    storageClass:
+    #size in Gi
+    storageSize: 5
+
+service: 
+  loadbalancer:
+    isMetalLb: false
+    isCilium: false
+    externalTrafficPolicy: Local
+    ip: 127.0.0.1
+
+configuration:
+  adminToken: "overlay_me"
+  domain: "overlay_me"
+  invitationsAllowed: "true"
+  singupsAllowed: "true"
+  signupsDomainsWhitelist: "google.com"
+  signupsVerify: "true"
+  smtpFrom: "overlay_me"
+  smtpHost: "overlay_me"
+  smtpPort: "587"
+  smtpSsl: "true"
+
+secret:
+  smtpUsername: "overlay_me"
+  smtpPassword: "overlay_me"

@@ -1,0 +1,23 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{.Release.Name}}-loadbalancer
+  annotations:
+    {{- if .Values.service.loadbalancer.isMetalLb}}
+    metallb.universe.tf/loadBalancerIPs: {{.Values.service.loadbalancer.ip}}
+    metallb.universe.tf/allow-shared-ip: {{lower .Release.Name}}
+    {{- end}}
+    {{- if .Values.service.loadbalancer.isCilium}}
+    io.cilium/lb-ipam-ips: {{.Values.service.loadbalancer.ip}}
+    io.cilium/lb-ipam-sharing-key: {{lower .Release.Name}}
+    {{- end}}
+spec:
+  selector:
+    app: {{.Release.Name}}
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      protocol: TCP
+  externalTrafficPolicy: {{.Values.service.loadbalancer.externalTrafficPolicy}}
+  type: LoadBalancer

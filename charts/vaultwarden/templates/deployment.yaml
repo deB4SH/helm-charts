@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Release.Name}}
+  labels:
+    app: {{.Release.Name}}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  progressDeadlineSeconds: 600
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: {{.Release.Name}}
+  template:
+    metadata:
+      labels:
+        app: {{.Release.Name}}
+    spec:
+      containers:
+        - name: {{.Release.Name}}
+          image: {{ .Values.deployment.image.location }}:{{ .Values.deployment.image.tag }}
+          imagePullPolicy: IfNotPresent
+          {{ if .Values.deployment.sleepStart }}
+          # Just spin & wait forever
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "while true; do sleep 30; done;" ]
+          {{ end }}
+          envFrom:
+            - configMapRef:
+                name: {{.Release.Name}}-configuration
+            - secretRef:
+                name: {{.Release.Name}}-smtp
+          resources:
+            limits:
+              cpu: {{ .Values.deployment.resources.limits.cpu }}m
+              memory: {{ .Values.deployment.resources.limits.memory }}M
+            requests:
+              cpu: {{ .Values.deployment.resources.requests.cpu }}m
+              memory: {{ .Values.deployment.resources.requests.memory }}M
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - mountPath: "/data"
+              name: data
+          livenessProbe:
+            failureThreshold: 50
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 120
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 50
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 2
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{.Release.Name}}-data
+        

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{.Release.Name}}-configuration
+data:
+  ADMIN_TOKEN: "{{.Values.configuration.adminToken}}"
+  DOMAIN: "{{.Values.configuration.domain}}"
+  INVITATIONS_ALLOWED: "{{.Values.configuration.invitationsAllowed}}"
+  SIGNUPS_ALLOWED: "{{.Values.configuration.signupsAllowed}}"
+  SIGNUPS_DOMAINS_WHITELIST: "{{.Values.configuration.signupsDomainsWhitelist}}"
+  SIGNUPS_VERIFY: "{{.Values.configuration.signupsVerify}}"
+  SMTP_FROM: "{{.Values.configuration.smtpFrom}}"
+  SMTP_HOST: "{{.Values.configuration.smtpHost}}"
+  SMTP_PORT: "{{.Values.configuration.smtpPort}}"
+  SMTP_SSL: "{{.Values.configuration.smtpSsl}}"
