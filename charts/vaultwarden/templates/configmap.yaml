@@ -13,3 +13,4 @@ data:
   SMTP_HOST: "{{.Values.configuration.smtpHost}}"
   SMTP_PORT: "{{.Values.configuration.smtpPort}}"
   SMTP_SSL: "{{.Values.configuration.smtpSsl}}"
+  DATABASE_URL: "{{.Values.configuration.databaseUrl}}"

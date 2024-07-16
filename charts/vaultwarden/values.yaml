@@ -37,6 +37,7 @@ configuration:
   smtpHost: "overlay_me"
   smtpPort: "587"
   smtpSsl: "true"
+  databaseUrl: "data/db.sqlite3"
 
 secret:
   smtpUsername: "overlay_me"
