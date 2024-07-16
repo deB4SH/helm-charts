@@ -1,0 +1,8 @@
+apiVersion: v2
+name: apache-tika
+version: 0.0.1
+description: This Chart deploys open-webui with preconfigured values.
+dependencies:
+  - name: tika
+    version: 2.9.0
+    repository: https://apache.jfrog.io/artifactory/tika

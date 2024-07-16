@@ -1,0 +1,6 @@
+ingresses:
+  - enabled: false
+    hostname: tika.local.lan
+    ingressClassName: nginx
+    annotations: {}
+      # cert-manager.io/cluster-issuer: selfsigned-issuer
