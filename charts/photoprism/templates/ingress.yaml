@@ -25,6 +25,6 @@ spec:
               service:
                 name: {{lower $.Release.Name}}-clusterip
                 port:
-                  number: 8888
+                  number: 2342
 {{ end }}
 {{ end }}
