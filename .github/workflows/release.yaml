@@ -1,8 +1,9 @@
 name: Release Charts
 
 on:
-  push:
-    tags: ['*']
+  workflow_run:
+    workflows: [Test]
+    types: [completed]
 
 # permissions are needed if pushing to ghcr.io
 permissions: 

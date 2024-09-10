@@ -1,0 +1,41 @@
+name: Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# permissions are needed if pushing to ghcr.io
+permissions: 
+  contents: write
+
+jobs:
+  test:     
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: azure/setup-helm@v3
+        with:
+          version: 'v3.15.2'
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          check-latest: true
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.6.1
+      - name: Run chart-testing (lint)
+        run: ct lint --debug --config ./.github/configs/ct.yaml --lint-conf ./.github/configs/lintconf.yaml
+      - name: Create kind cluster
+        if: steps.list-changed.outputs.changed == 'true'
+        uses: helm/kind-action@v1.10.0
+      - name: Run chart-testing (install)
+        run: ct install --config ./.github/configs/ct.yaml
+        if: steps.list-changed.outputs.changed == 'true'
+      - name: Publish Helm charts
+        uses: stefanprodan/helm-gh-pages@master
+        with:
+          token: "${{ secrets.GITHUB_TOKEN }}"
