@@ -35,7 +35,3 @@ jobs:
       - name: Run chart-testing (install)
         run: ct install --config ./.github/configs/ct.yaml
         if: steps.list-changed.outputs.changed == 'true'
-      - name: Publish Helm charts
-        uses: stefanprodan/helm-gh-pages@master
-        with:
-          token: "${{ secrets.GITHUB_TOKEN }}"
