@@ -1,0 +1,18 @@
+{{- if .Values.service.loadbalancer.enabled }}
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{.Release.Name}}-loadbalancer
+  labels:
+    app: {{.Release.Name}}-nexus
+  annotations:
+    {{- range $key, $value := .Values.service.loadbalancer.annotations}}
+    {{ $key }}: {{ tpl $value $ }}
+    {{- end}}
+spec:
+  selector:
+    app: {{.Release.Name}}-nexus
+  ports:
+    {{- toYaml .Values.container.ports | nindent 4 }}
+  type: LoadBalancer
+{{- end }}

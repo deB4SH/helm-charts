@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{.Release.Name}}-clusterip
+  labels:
+    app: {{.Release.Name}}-nexus
+spec:
+  selector:
+    app: {{.Release.Name}}-nexus
+  ports:
+    {{- toYaml .Values.container.ports | nindent 4 }}
+  type: ClusterIP

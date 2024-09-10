@@ -1,0 +1,9 @@
+apiVersion: v2
+name: nexus-repositorymanager
+description: A Helm chart, that allows you to easyly deploy nexus3 in your kubernetes cluster.
+version: 0.0.4
+appVersion: 3.72.0
+home: https://github.com/la-cc/anything-llm-helm-chart
+maintainers:
+  - name: deB4SH
+    url: https://github.com/deB4SH

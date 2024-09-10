@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Release.Name}}-nexus
+  labels:
+    app: {{.Release.Name}}-nexus
+spec:
+  strategy:
+    type: Recreate #single instance only
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: {{.Release.Name}}-nexus
+  template:
+    metadata:
+      labels:
+        app: {{.Release.Name}}-nexus
+    spec:
+      #nexus3 image is only build for amd64
+      affinity:
+        {{- toYaml .Values.container.affinity | nindent 12 }}
+      containers:
+        - name: nexus
+          image: sonatype/nexus3:{{ default .Chart.AppVersion .Values.container.image.tag}}-alpine
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: data
+              mountPath: /nexus-data
+          ports:
+            {{- range .Values.container.ports }}
+            - name: {{ .name }}
+              containerPort: {{ .port }}
+            {{- end }}
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{.Release.Name}}-nexus-data

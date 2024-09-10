@@ -1,0 +1,45 @@
+container:
+  # nexus is only build for amd64 - so lets fix it this way
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: beta.kubernetes.io/arch
+                operator: In
+                values:
+                  - amd64
+  image:
+    # only contains version number
+    tag: 3.72.0
+  ports:
+    - name: http
+      protocol: "TCP"
+      port: 8081
+      targetPort: 8081
+
+storage:
+  data:
+    accessMode: ReadWriteOnce
+    storageClassName: "" #overlay this with your storage class name
+    storageRequest: 250 #value in Gi
+
+service:
+  loadbalancer:
+    enabled: false
+    ip: "127.0.0.1" #overlay with your loadbalancer ip
+    annotations:
+      # uncomment when using metallb
+      #metallb.universe.tf/loadBalancerIPs: {{.Values.service.loadbalancer.ip}}
+      #metallb.universe.tf/allow-shared-ip: {{.Release.Name}}-nexus
+      # uncomment when using cilium
+      #io.cilium/lb-ipam-ips: "{{.Values.service.loadbalancer.ip}}"
+      #io.cilium/lb-ipam-sharing-key: "{{.Release.Name}}-nexus"
+
+
+ingresses:
+  - enabled: false
+    hostname: nexus.local.lan
+    ingressClassName: nginx
+    annotations: {}
+      # cert-manager.io/cluster-issuer: selfsigned-issuer
