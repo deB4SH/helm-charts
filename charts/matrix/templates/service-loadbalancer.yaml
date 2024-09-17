@@ -20,7 +20,3 @@ spec:
       protocol: TCP
       port: 8008
       targetPort: 8008
-    - name: metrics
-      protocol: TCP
-      port: 9000
-      targetPort: 9000
