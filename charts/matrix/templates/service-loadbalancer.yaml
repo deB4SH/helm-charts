@@ -5,11 +5,11 @@ metadata:
   annotations:
     {{- if .Values.service.loadbalancerIp.isMetalLb}}
     metallb.universe.tf/loadBalancerIPs: {{.Values.service.loadbalancerIp.ip}}
-    metallb.universe.tf/allow-shared-ip: antennas
+    metallb.universe.tf/allow-shared-ip: synapsematrix
     {{- end}}
     {{- if .Values.service.loadbalancerIp.isCilium}}
     io.cilium/lb-ipam-ips: {{.Values.service.loadbalancerIp.ip}}
-    io.cilium/lb-ipam-sharing-key: antennas
+    io.cilium/lb-ipam-sharing-key: synapsematrix
     {{- end}}
 spec:
   type: LoadBalancer
@@ -17,9 +17,10 @@ spec:
     app: matrix
   ports:
     - name: matrix
+      protocol: TCP
       port: 8008
       targetPort: 8008
     - name: metrics
+      protocol: TCP
       port: 9000
       targetPort: 9000
-  
