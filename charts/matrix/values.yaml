@@ -40,7 +40,7 @@ logConfiguration: |-
     file:
       class: logging.handlers.TimedRotatingFileHandler
       formatter: precise
-      filename: /tmp/log/matrix-synapse/homeserver.log
+      filename: /tmp/homeserver.log
       when: midnight
       backupCount: 1  # Does not include the current log file.
       encoding: utf8
