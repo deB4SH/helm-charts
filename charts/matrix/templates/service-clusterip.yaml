@@ -7,7 +7,7 @@ spec:
   selector:
     app: matrix
   ports:
-    - name: matrix
+    - name: http
       port: 8008
       targetPort: 8008
     - name: metrics
