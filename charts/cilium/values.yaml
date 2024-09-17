@@ -48,3 +48,8 @@ cilium:
       enabled: true
     relay:
       enabled: true
+
+  ingressController:
+    enabled: true
+    default: false
+    
