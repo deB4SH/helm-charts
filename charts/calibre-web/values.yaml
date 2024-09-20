@@ -1,0 +1,49 @@
+configuration:
+  tz: "Etc/UTC"
+  oauthlibRelaxTokenScope: "1"
+
+deployment:
+  image:
+    location: "lscr.io/linuxserver/calibre-web"
+    tag: "0.6.23-ls290"
+  resources:
+    limits:
+      cpu: 250m
+      memory: 750Mi
+    requests:
+      cpu: 50m
+      memory: 500Mi
+
+pvc:
+  data:
+    accessMode: ReadWriteOnce
+    storageClass: ""
+    storageSize: 1
+
+additionalPvc: {}
+  # - name: ebooks
+  #   type: "" # possible options: nfs, cluster
+  #   size: 1 #value in Gi
+  #   accessMode: ReadWriteOnce
+  #   mountPath: "/books"
+  #   isReadOnly: true
+  #   # nfs required values (uncomment if required)
+  #   nfsvers: "" #possible option 4.1 - for all options review your nfs configuration
+  #   path: ""
+  #   server: ""
+  #   # cluster required values (uncomment if required)
+  #   storageClass: "myAwesomeStorageClass"
+
+service:
+  loadbalancerIp:
+    enabled: false
+    isMetalLb: false
+    isCilium: false
+    ip: "127.0.0.1"
+
+ingresses:
+  - enabled: false
+    hostname: calibre.local.lan
+    ingressClassName: nginx
+    annotations: {}
+      # cert-manager.io/cluster-issuer: selfsigned-issuer

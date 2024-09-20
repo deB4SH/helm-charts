@@ -1,0 +1,4 @@
+apiVersion: v2
+name: calibre-web
+version: 0.0.1
+description: This Chart deploys the calibre web linuxserver image.

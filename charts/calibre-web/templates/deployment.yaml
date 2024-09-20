@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{lower .Release.Name}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{lower .Release.Name}}
+  template:
+    metadata:
+      labels:
+        app: {{lower .Release.Name}}
+      annotations:
+        checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    spec:
+      containers:
+        - image: {{.Values.deployment.image.location}}:{{.Values.deployment.image.tag}}
+          name: calibre-web
+          envFrom: 
+          - configMapRef:
+              name: {{lower .Release.Name}}-configuration
+          ports:
+            - containerPort: 8083
+          resources:
+            {{- toYaml .Values.deployment.resources | nindent 12 }}
+          volumeMounts:
+          - mountPath: /config
+            name: data
+          {{- range .Values.additionalPvc -}} {{ printf "\n" }}
+          - name: {{lower $.Release.Name}}-{{.name}}
+            mountPath: {{.mountPath}}
+            {{- if .isReadOnly}}
+            readOnly: {{.isReadOnly}} {{end}}
+          {{- end }}
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{.Release.Name}}-data
+        {{- range .Values.additionalPvc -}} {{ printf "\n" }}
+        - name: {{lower $.Release.Name}}-{{.name}}
+          persistentVolumeClaim:
+            claimName: {{lower $.Release.Name}}-{{.name}}
+        {{- end}}

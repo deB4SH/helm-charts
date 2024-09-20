@@ -1,0 +1,55 @@
+{{- range .Values.additionalPvc }}
+{{if eq .type "nfs" }}
+#create pvc and pv for nfs mount
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{lower $.Release.Name}}-{{.name}}
+spec:
+  capacity:
+    storage: {{.size}}Gi
+  volumeMode: Filesystem
+  accessModes:
+    - {{ .accessMode }}
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: nfs
+  mountOptions:
+    - hard
+    - nfsvers={{.nfsvers}}
+  nfs:
+    path: {{.path}}
+    server: {{.server}}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{lower $.Release.Name}}-{{.name}}
+spec:
+  accessModes:
+    - {{ .accessMode }}
+  {{- if eq .type "nfs" }}
+  storageClassName: nfs
+  {{- end}}
+  resources:
+    requests:
+      storage: {{ .size }}Gi
+{{end}}
+{{if eq .type "cluster" }}
+# create pvc for type cluster via storageclass
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{lower $.Release.Name}}-{{.name}}
+spec:
+  accessModes:
+    - {{ .accessMode }}
+  {{- if .storageClass }}
+  storageClassName: {{ .storageClass }}
+  {{- end}}
+  resources:
+    requests:
+      storage: {{ .size }}Gi
+{{end}}
+{{- end }}
