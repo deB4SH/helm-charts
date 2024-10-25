@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitea
+  labels:
+    app: gitea
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  progressDeadlineSeconds: 600
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: gitea
+  template:
+    metadata:
+      labels:
+        app: gitea
+      annotations:
+        checksum/configuration: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    spec:
+      containers:
+        - name: gitea
+          image: {{ .Values.deployment.image.location }}:{{ .Values.deployment.image.tag }}
+          imagePullPolicy: IfNotPresent
+          {{ if .Values.deployment.sleepStart }}
+          # Just spin & wait forever
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "while true; do sleep 30; done;" ]
+          {{ end }}
+          envFrom:
+            - configMapRef:
+                name: gitea-configuration
+          ports:
+            - containerPort: 3000
+              name: http
+            - containerPort: 60000
+              name: ssh
+          volumeMounts:
+            - mountPath: /var/lib/gitea
+              name: gitea-data
+            - mountPath: /etc/gitea
+              name: gitea-config
+      volumes:
+        - name: gitea-data
+          persistentVolumeClaim:
+            claimName: gitea-data
+        - name: gitea-config
+          persistentVolumeClaim:
+            claimName: gitea-config
+
+        

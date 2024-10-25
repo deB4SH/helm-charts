@@ -1,0 +1,34 @@
+deployment:
+  sleepStart: false
+  image:
+    location: gitea/gitea
+    tag: 1.22.3-rootless
+
+pvc:
+  data:
+    accessMode: ReadWriteMany
+    #only applied when set
+    storageClass:
+    #size in Gi
+    storageSize: 5
+  config:
+    accessMode: ReadWriteMany
+    #only applied when set
+    storageClass:
+    #size in Gi
+    storageSize: 5
+
+ingress:
+  - name: gitea.local
+  - name: gitea.lan
+
+service:
+  loadbalancerIp: "127.0.0.1" #overlay me
+
+configuration:
+  databaseType: "postgres"
+  databaseHost: "overlay_me"
+  databaseName: "overlay_me"
+  databaseUser: "overlay_me"
+  databasePassword: "overlay_me"
+  disableRegistration: "true"

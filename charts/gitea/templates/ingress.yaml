@@ -1,0 +1,31 @@
+{{- range .Values.ingress }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gitea-ingress-{{.name}}
+  annotations:
+    cert-manager.io/cluster-issuer: "selfsigned-cluster-issuer"
+    kubernetes.io/ingress.class: "traefik"
+    traefik.ingress.kubernetes.io/router.entrypoints: "web, websecure"
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    {{- range $key, $val := .additionalAnnotations }}
+    {{ $key }}: "{{ $val }}"
+    {{- end }}
+spec:
+  tls:
+    - hosts:
+        - {{ .name }}
+      secretName: {{ .name }}
+  rules:
+    - host: {{ .name }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: gitea-clusterip
+                port:
+                  number: 3000
+---
+{{- end -}}

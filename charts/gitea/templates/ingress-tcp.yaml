@@ -1,0 +1,12 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: git-tcp-ingress
+spec:
+  entryPoints:
+    - gitssh
+  routes:
+    - match: HostSNI(`*`)
+      services:
+        - name: gitea-clusterip
+          port: 60000

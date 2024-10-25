@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gitea-config
+spec:
+  accessModes:
+    - {{ .Values.pvc.config.accessMode }}
+  {{ if .Values.pvc.config.storageClass }}
+  storageClassName: {{ .Values.pvc.config.storageClass }}
+  {{ end}}
+  resources:
+    requests:
+      storage: {{ .Values.pvc.config.storageSize }}Gi
