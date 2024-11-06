@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{lower .Release.Name}}
+  labels:
+    app: {{lower .Release.Name}}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  progressDeadlineSeconds: 600
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: {{lower .Release.Name}}
+  template:
+    metadata:
+      labels:
+        app: {{lower .Release.Name}}
+      annotations:
+        checksum/configuration: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+    spec:
+      containers:
+        - name: {{lower .Release.Name}}
+          image: {{ .Values.deployment.image.location }}:{{ .Values.deployment.image.tag }}
+          imagePullPolicy: IfNotPresent
+          {{ if .Values.deployment.sleepStart }}
+          # Just spin & wait forever
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "while true; do sleep 30; done;" ]
+          {{ end }}
+          envFrom:
+            - configMapRef:
+                name: {{lower .Release.Name}}-configuration
+            - secretRef:
+                name: {{.Release.Name}}-secret
+          ports:
+            - containerPort: 34197
+              name: game
+            - containerPort: 27015
+              name: rcon
+          volumeMounts:
+            - mountPath: /factorio
+              name: factorio-data
+      volumes:
+        - name: factorio-data
+          persistentVolumeClaim:
+            claimName: factorio-data
+
+        

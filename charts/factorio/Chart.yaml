@@ -1,0 +1,4 @@
+apiVersion: v2
+name: factorio
+version: 0.0.1
+description: This Chart deploys factorio.

@@ -1,0 +1,23 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{lower .Release.Name}}-loadbalancer
+  annotations:
+    {{- if .Values.service.loadbalancerIp.isMetalLb}}
+    metallb.universe.tf/loadBalancerIPs: {{.Values.service.loadbalancerIp.ip}}
+    metallb.universe.tf/allow-shared-ip: factorio
+    {{- end}}
+    {{- if .Values.service.loadbalancerIp.isCilium}}
+    io.cilium/lb-ipam-ips: {{.Values.service.loadbalancerIp.ip}}
+    io.cilium/lb-ipam-sharing-key: factorio
+    {{- end}}
+spec:
+  type: LoadBalancer
+  ports:
+    - name: game
+      protocol: TCP
+      port: 34197
+      targetPort: 34197
+  selector:
+    app: {{lower .Release.Name}}
+  

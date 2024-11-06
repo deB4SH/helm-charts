@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{lower .Release.Name}}-configuration
+data:
+  GENERATE_NEW_SAVE: "{{.Values.configuration.generateNewSave}}"
+  LOAD_LATEST_SAVE: "{{.Values.configuration.loadLatestSave}}"
+  PORT: "{{.Values.configuration.port}}"
+  BIND: "{{.Values.configuration.bind}}"
+  RCON_PORT: "{{.Values.configuration.rconPort}}"
+  SAVE_NAME: "{{.Values.configuration.saveName}}"
+  CONSOLE_LOG_LOCATION: "{{.Values.configuration.consoleLogLocation}}"
+  UPDATE_MODS_ON_START: "{{.Values.configuration.updateModsOnStart}}"
+  DLC_SPACE_AGE: "{{.Values.configuration.dlcSpaceAge}}"
+  MODS: "{{.Values.configuration.mods}}"

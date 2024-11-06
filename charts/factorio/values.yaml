@@ -1,0 +1,32 @@
+deployment:
+  sleepStart: false
+  image:
+    location: factoriotools/factorio
+    tag: 2.0.15
+
+pvc:
+  data:
+    accessMode: ReadWriteMany
+    #only applied when set
+    storageClass:
+    storageSize: 50 #size in Gi
+
+
+service:
+  loadbalancerIp: "127.0.0.1" #overlay me
+
+configuration:
+  generateNewSave: "false"
+  loadLatestSave: "true"
+  port: "34197" # if changing this value you need to update the deployment
+  bind: ""
+  rconPort: "27015" # if changing this value you need to update the deployment
+  saveName: "_autosave1"
+  consoleLogLocation: ""
+  updateModsOnStart: ""
+  dlcSpaceAge: "true"
+  mods: "/factorio/mods"
+
+secret:
+  token: ""
+  username: ""

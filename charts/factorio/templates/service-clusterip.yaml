@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{lower .Release.Name}}-clusterip
+spec:
+  type: ClusterIP
+  ports:
+    - name: game
+      protocol: TCP
+      port: 34917
+      targetPort: 34917
+    - name: rcon
+      protocol: TCP
+      port: 27015
+      targetPort: 27015
+  selector:
+    app: {{lower .Release.Name}}
