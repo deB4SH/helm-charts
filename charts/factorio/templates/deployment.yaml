@@ -37,7 +37,11 @@ spec:
                 name: {{.Release.Name}}-secret
           ports:
             - containerPort: 34197
-              name: game
+              name: gameTCP
+              protocol: TCP
+            - containerPort: 34197
+              name: gameUDP
+              protocol: UDP
             - containerPort: 27015
               name: rcon
           volumeMounts:

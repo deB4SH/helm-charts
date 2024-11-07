@@ -18,6 +18,10 @@ spec:
       protocol: TCP
       port: 34197
       targetPort: 34197
+    - name: game
+      protocol: UDP
+      port: 34197
+      targetPort: 34197
   selector:
     app: {{lower .Release.Name}}
   
