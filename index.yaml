@@ -2,9 +2,9 @@ apiVersion: v1
 entries:
   antennas:
   - apiVersion: v2
-    created: "2024-11-25T17:39:53.737900875Z"
+    created: "2024-12-03T13:10:55.186626626Z"
     description: Deploys antennas the DVR emulator for Plex DVR. Github - https://github.com/jfarseneau/antennas
-    digest: fe26b70230b70c55410bac6a2ae6d157b4a50292f1c03f771c668c19cc17f88d
+    digest: 4a26919ce888a872beb386c8a944aff9e52c62821bc52592b96e1d35fe58538a
     name: antennas
     urls:
     - https://deB4SH.github.io/helm-charts/antennas-0.0.4.tgz
@@ -27,13 +27,13 @@ entries:
     version: 0.0.1
   apache-tika:
   - apiVersion: v2
-    created: "2024-11-25T17:39:53.740033787Z"
+    created: "2024-12-03T13:10:55.188207026Z"
     dependencies:
     - name: tika
       repository: https://apache.jfrog.io/artifactory/tika
       version: 2.9.0
     description: This Chart deploys open-webui with preconfigured values.
-    digest: b9cb5bb3d02d46b51b1033f57f2a2bf330326b8a7edb6533f8b05301cb7bea8a
+    digest: 22816b2679dcb57e2f5fbcd888ef2497ea677bdf30e0f3e8423403ef411fd190
     name: apache-tika
     urls:
     - https://deB4SH.github.io/helm-charts/apache-tika-0.0.1.tgz
@@ -41,45 +41,45 @@ entries:
   atuin:
   - apiVersion: v2
     appVersion: v18.0.0
-    created: "2024-11-25T17:39:53.740481539Z"
+    created: "2024-12-03T13:10:55.188472945Z"
     description: This Chart deploys atuin.
-    digest: 0cf000c96cb11bfc21e3457e0bc4638e190a70049c160f48ef5453dabb726b9f
+    digest: 2aa45f8df5ebf0253acfb913aa596ac220e7b4e0a69cde17b74372420731035d
     name: atuin
     urls:
     - https://deB4SH.github.io/helm-charts/atuin-0.0.2.tgz
     version: 0.0.2
   authelia:
   - apiVersion: v2
-    created: "2024-11-25T17:39:53.744556439Z"
+    created: "2024-12-03T13:10:55.192579537Z"
     dependencies:
     - name: authelia
       repository: https://charts.authelia.com
       version: 0.8.58
     description: This Chart deploys authelia.
-    digest: c81c18ec79789f1ee52f5072a0adde20b331382dabc75266a823d51956a71b63
+    digest: 48891a94bb6a4e28ffdf85cd107804c3e156027bae38c3b047c401eddc98c491
     name: authelia
     urls:
     - https://deB4SH.github.io/helm-charts/authelia-0.0.2.tgz
     version: 0.0.2
   calibre-web:
   - apiVersion: v2
-    created: "2024-11-25T17:39:53.744934331Z"
+    created: "2024-12-03T13:10:55.192898977Z"
     description: This Chart deploys the calibre web linuxserver image.
-    digest: 76da1a923873da24ab2017ead171c3f04328ca2f2d29f9af379192b986bbf47a
+    digest: a697707a1ae3072fa94bc7b36922ad57278f3c2e5be51f7522c0300c6d571c72
     name: calibre-web
     urls:
     - https://deB4SH.github.io/helm-charts/calibre-web-0.0.1.tgz
     version: 0.0.1
   cilium:
   - apiVersion: v2
-    created: "2024-11-25T17:39:53.756955098Z"
+    created: "2024-12-03T13:10:55.203634515Z"
     dependencies:
     - name: cilium
       repository: https://helm.cilium.io/
       version: 1.16.1
     description: This Chart deploys cilium with prepared l2 components, envoy and
       hubble. This is primarly useful for homelab environments.
-    digest: f3f9986637a0b28fca795f91a20495b2aa68ce1c557749c53632c3b999857955
+    digest: d10d5ceec1ddfaa4ffc70dffca2e6fea72ed04f1099f2eb675f6fce5d2a15266
     name: cilium
     urls:
     - https://deB4SH.github.io/helm-charts/cilium-0.0.5.tgz
@@ -125,32 +125,32 @@ entries:
     version: 0.0.1
   external-dns:
   - apiVersion: v2
-    created: "2024-11-25T17:39:53.760545316Z"
+    created: "2024-12-03T13:10:55.207815867Z"
     dependencies:
     - name: external-dns
       repository: https://charts.bitnami.com/bitnami
       version: 8.0.2
     description: This Chart deploys external-dns as umbrella chart prepared for usage
       with pihole.
-    digest: 584af77fe854368490aa6df0ac8e5257b69fbf0ce565ba318921dd07b384fce8
+    digest: a603ccb012b150569fc12f13ec4c9f944b2f82b6a78e65014ff44418a125f25a
     name: external-dns
     urls:
     - https://deB4SH.github.io/helm-charts/external-dns-0.0.1.tgz
     version: 0.0.1
   factorio:
   - apiVersion: v2
-    created: "2024-11-25T17:39:53.760826789Z"
+    created: "2024-12-03T13:10:55.208071678Z"
     description: This Chart deploys factorio.
-    digest: cd8e50f90f3b49e8e86bbcd438535fe0cc7448ab84ca841f9b48964d929e2738
+    digest: aa6665e6b4472d12396920006bb773898c29135f34a4a59c7fce0bde37b830b4
     name: factorio
     urls:
     - https://deB4SH.github.io/helm-charts/factorio-0.0.1.tgz
     version: 0.0.1
   gitea:
   - apiVersion: v2
-    created: "2024-11-25T17:39:53.761103443Z"
+    created: "2024-12-03T13:10:55.208322459Z"
     description: This Chart deploys gitea.
-    digest: 3294a7ec0dcba2745bd599e556d301a9f1d4243aaa9582040fda4989c12ea101
+    digest: c3ffe45cf95747619639e57d0d26a817bddc9c43540b039aa7ecfa80d8bec962
     name: gitea
     urls:
     - https://deB4SH.github.io/helm-charts/gitea-0.0.1.tgz
@@ -158,9 +158,9 @@ entries:
   kanboard:
   - apiVersion: v2
     appVersion: v1.2.26
-    created: "2024-11-25T17:39:53.761768468Z"
+    created: "2024-12-03T13:10:55.208953975Z"
     description: Kanban project management software
-    digest: 4802ac86bdd319224c2edf910948580dfceaf58352a1cf5cf22d682be0b3be8b
+    digest: 46a01c5a209a9367d5c6ba36828b63086ad77f7e27244ddb0bc0650026631385
     home: https://github.com/deB4SH/helm-charts
     icon: https://avatars.githubusercontent.com/u/13722943
     name: kanboard
@@ -200,19 +200,19 @@ entries:
     version: 0.0.1
   ldap:
   - apiVersion: v2
-    created: "2024-11-25T17:39:53.762198357Z"
+    created: "2024-12-03T13:10:55.209196721Z"
     description: This Chart deploys https://github.com/deB4SH/LDAP-Homelab with configurable
       users and groups.
-    digest: 80390d49b29bc90316633eadedb2d60136d1fc8bbb1f9c6033c69f6d7bf71994
+    digest: 5b40af245de732fb631fcb4799c286246af64957cc5397e7cd32a1f969a66866
     name: ldap
     urls:
     - https://deB4SH.github.io/helm-charts/ldap-1.0.0.tgz
     version: 1.0.0
   matrix:
   - apiVersion: v2
-    created: "2024-11-25T17:39:53.762701061Z"
+    created: "2024-12-03T13:10:55.209438556Z"
     description: This Chart deploys matrix.
-    digest: 4bd438c4f45b74481278c423a9e1cc3cc8a88c18471a2bcdb276287f3000f908
+    digest: 4363b0af9e29035e9f82fa9043678b99b20493b8b5a870a05536207c640812fb
     name: matrix
     urls:
     - https://deB4SH.github.io/helm-charts/matrix-1.0.0.tgz
@@ -220,10 +220,10 @@ entries:
   nexus-repositorymanager:
   - apiVersion: v2
     appVersion: 3.72.0
-    created: "2024-11-25T17:39:53.763340988Z"
+    created: "2024-12-03T13:10:55.209747366Z"
     description: A Helm chart, that allows you to easyly deploy nexus3 in your kubernetes
       cluster.
-    digest: af6e5604436be1c67f3bc8f1cfa063e43134a9f3062768c78091c500b8f638d4
+    digest: 7617ef4b5b6483e0a768df7c628c2f9e87d5c195da1a517419d632d6c2c4cef6
     home: https://github.com/la-cc/anything-llm-helm-chart
     maintainers:
     - name: deB4SH
@@ -234,69 +234,69 @@ entries:
     version: 0.0.4
   nfs-subdir-provisioner:
   - apiVersion: v2
-    created: "2024-11-25T17:39:53.763980526Z"
+    created: "2024-12-03T13:10:55.210361009Z"
     dependencies:
     - name: nfs-subdir-external-provisioner
       repository: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
       version: 4.0.18
     description: This Chart deploys nfs-subdir-provisioner.
-    digest: 30c3a4a8d2f681eddd3f7d99fb6e9bc55f9c788db83ef21fe8f71ad1b67d0695
+    digest: 0ae226f836ad7c71a48b17d83a194ec8a57f0963b668f5cd974c034c5d507eed
     name: nfs-subdir-provisioner
     urls:
     - https://deB4SH.github.io/helm-charts/nfs-subdir-provisioner-0.0.1.tgz
     version: 0.0.1
   open-webui:
   - apiVersion: v2
-    created: "2024-11-25T17:39:53.766412323Z"
+    created: "2024-12-03T13:10:55.215309605Z"
     dependencies:
     - name: open-webui
       repository: https://helm.openwebui.com/
-      version: 3.4.0
+      version: 4.0.6
     description: This Chart deploys open-webui with preconfigured values.
-    digest: bcbdcc8678b2265b40933baaaaadaac9a281a297394bddfa9ff278a809eade77
+    digest: 447ac909d89205898790e59377763a23d856c2f2a0ca9c5b30d950225ebeca31
     name: open-webui
     urls:
     - https://deB4SH.github.io/helm-charts/open-webui-0.0.1.tgz
     version: 0.0.1
   photoprism:
   - apiVersion: v2
-    created: "2024-11-25T17:39:53.766818998Z"
+    created: "2024-12-03T13:10:55.215723051Z"
     description: This Chart deploys photoprism.
-    digest: c2f3998b8a881203faf744fddafdc4492dd1b86f3d63a8f6f0cbf51e7e779955
+    digest: 1c999eaf5d1f579554470f612d5f61a1789d959489db7fc098e65aed7d71b706
     name: photoprism
     urls:
     - https://deB4SH.github.io/helm-charts/photoprism-0.0.1.tgz
     version: 0.0.1
   rss:
   - apiVersion: v2
-    created: "2024-11-25T17:39:53.767111402Z"
+    created: "2024-12-03T13:10:55.216000954Z"
     description: This Chart deploys ssddanbrown rss.
-    digest: 92aadfcf5f99c5a873ac8ef27d61072f8e5ff89e60a2504e22a75350a25c6a7b
+    digest: d6b66de74a516dc6bd9dec1d36bb1f91ae70142507acd12ac9dea2395ad5bde0
     name: rss
     urls:
     - https://deB4SH.github.io/helm-charts/rss-0.0.1.tgz
     version: 0.0.1
   traefik:
   - apiVersion: v2
-    created: "2024-11-25T17:39:53.77519553Z"
+    created: "2024-12-03T13:10:55.223644576Z"
     dependencies:
     - name: traefik
       repository: https://traefik.github.io/charts
       version: 29.0.0
     description: This Chart deploys traefik with prepared configuration primarly for
       homelab usage.
-    digest: c322a9b8c1a30b2ff1778e768024a3354eca13a28a6995fcd3f8b8a3a62fa788
+    digest: cc66fd42a1e05dfe9989097a6bfee770dc7672a1c842ebff676b8225ea66b9ed
     name: traefik
     urls:
     - https://deB4SH.github.io/helm-charts/traefik-0.0.1.tgz
     version: 0.0.1
   vaultwarden:
   - apiVersion: v2
-    created: "2024-11-25T17:39:53.775522548Z"
+    created: "2024-12-03T13:10:55.223920786Z"
     description: This Chart deploys vaultwarden.
-    digest: 6d1e19e98519f35db5e7fd7fc6feb31469d5881366ab48495cc791200527a552
+    digest: 0a4cda8dbd88b2648869021b07009b3cb4758b299882530220d71d2574a63eb8
     name: vaultwarden
     urls:
     - https://deB4SH.github.io/helm-charts/vaultwarden-1.0.0.tgz
     version: 1.0.0
-generated: "2024-11-25T17:39:53.737343349Z"
+generated: "2024-12-03T13:10:55.18620819Z"
