@@ -23,7 +23,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{.Release.Name}}-clusterip
+                name: {{ $.Release.Name }}-clusterip
                 port:
                   number: 80
 {{- end }}
