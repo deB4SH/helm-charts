@@ -2,7 +2,7 @@ deployment:
   sleepStart: false
   image:
     location: vaultwarden/server
-    tag: 1.32.5
+    tag: 1.32.7
   resources:
     limits:
       cpu: 300
@@ -38,6 +38,18 @@ configuration:
   smtpPort: "587"
   smtpSsl: "true"
   databaseUrl: "data/db.sqlite3"
+
+ingresses:
+  - enabled: false
+    ingressClass: nginx
+    hostname: vaultwarden.local.lan
+    annotations: {}
+      # cert-manager.io/cluster-issuer: selfsigned-issuer
+  - enabled: false
+    ingressClass: nginx
+    hostname: vaultwarden.lan
+    annotations: {}
+      # cert-manager.io/cluster-issuer: selfsigned-issuer
 
 secret:
   smtpUsername: "overlay_me"
