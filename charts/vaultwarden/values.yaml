@@ -41,12 +41,12 @@ configuration:
 
 ingresses:
   - enabled: false
-    ingressClass: nginx
+    ingressClassName: nginx
     hostname: vaultwarden.local.lan
     annotations: {}
       # cert-manager.io/cluster-issuer: selfsigned-issuer
   - enabled: false
-    ingressClass: nginx
+    ingressClassName: nginx
     hostname: vaultwarden.lan
     annotations: {}
       # cert-manager.io/cluster-issuer: selfsigned-issuer
