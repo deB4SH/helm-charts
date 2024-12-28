@@ -18,7 +18,7 @@ pvc:
     #size in Gi
     storageSize: 5
 
-ingress:
+ingresses:
   - enabled: false
     ingressClassName: nginx
     hostname: gitea.local.lan
