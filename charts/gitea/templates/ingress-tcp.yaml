@@ -8,5 +8,5 @@ spec:
   routes:
     - match: HostSNI(`*`)
       services:
-        - name: gitea-clusterip
+        - name: {{ $.Release.Name }}-clusterip
           port: 60000
