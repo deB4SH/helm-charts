@@ -2,7 +2,7 @@ deployment:
   sleepStart: false
   image:
     location: gitea/gitea
-    tag: 1.22.3-rootless
+    tag: 1.22.6-rootless
 
 pvc:
   data:
@@ -19,8 +19,16 @@ pvc:
     storageSize: 5
 
 ingress:
-  - name: gitea.local
-  - name: gitea.lan
+  - enabled: false
+    ingressClassName: nginx
+    hostname: gitea.local.lan
+    annotations: {}
+      # cert-manager.io/cluster-issuer: selfsigned-issuer
+  - enabled: false
+    ingressClassName: nginx
+    hostname: gitea.lan
+    annotations: {}
+      # cert-manager.io/cluster-issuer: selfsigned-issuer
 
 service:
   loadbalancerIp: "127.0.0.1" #overlay me
