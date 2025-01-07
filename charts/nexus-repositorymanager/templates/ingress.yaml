@@ -25,6 +25,10 @@ spec:
               service:
                 name: {{$.Release.Name}}-clusterip
                 port:
+                  {{- if .customPort }}
+                  number: {{ .customPort }}
+                  {{- else }}
                   number: 8081
+                  {{- end }}
 {{- end }}
 {{- end }}

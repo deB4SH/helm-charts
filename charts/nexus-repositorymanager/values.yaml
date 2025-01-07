@@ -43,3 +43,9 @@ ingresses:
     ingressClassName: nginx
     annotations: {}
       # cert-manager.io/cluster-issuer: selfsigned-issuer
+  - enabled: false
+    hostname: nexus-docker.local.lan
+    ingressClassName: nginx
+    customPort: 1234
+    annotations: {}
+      # cert-manager.io/cluster-issuer: selfsigned-issuer
