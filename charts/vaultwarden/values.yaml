@@ -2,7 +2,7 @@ deployment:
   sleepStart: false
   image:
     location: vaultwarden/server
-    tag: 1.32.7
+    tag: 1.33.0
   resources:
     limits:
       cpu: 300
@@ -36,7 +36,7 @@ configuration:
   smtpFrom: "overlay_me"
   smtpHost: "overlay_me"
   smtpPort: "587"
-  smtpSsl: "true"
+  smtpSecurity: "starttls"
   databaseUrl: "data/db.sqlite3"
 
 ingresses:
