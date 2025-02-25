@@ -4,5 +4,5 @@ version: 0.0.1
 description: This Chart deploys external-dns as umbrella chart prepared for usage with pihole.
 dependencies:
   - name: external-dns
-    version: 8.0.2
-    repository: https://charts.bitnami.com/bitnami
+    version: 8.7.5
+    repository: oci://ghcr.io/deb4sh/helm-bitnami-external-dns-oci/external-dns
