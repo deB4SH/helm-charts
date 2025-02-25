@@ -5,4 +5,4 @@ description: This Chart deploys external-dns as umbrella chart prepared for usag
 dependencies:
   - name: external-dns
     version: 8.7.5
-    repository: oci://ghcr.io/deb4sh/helm-bitnami-external-dns-oci/external-dns
+    repository: oci://ghcr.io/deb4sh/helm-bitnami-external-dns-oci
