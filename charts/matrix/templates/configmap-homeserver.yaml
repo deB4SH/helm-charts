@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: matrix-configuration-homeserver
-data:
-  homeserver.yaml: {{- .Values.homeserverConfiguration | toYaml | indent 1 }}
-  log.config: {{- .Values.logConfiguration | toYaml | indent 1 }}

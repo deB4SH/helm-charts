@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{lower .Release.Name}}-configuration
-data:
-  PUID: "1000"
-  PGID: "1000"
-  TZ: "{{.Values.configuration.tz}}"
-  OAUTHLIB_RELAX_TOKEN_SCOPE: "{{.Values.configuration.oauthlibRelaxTokenScope}}"

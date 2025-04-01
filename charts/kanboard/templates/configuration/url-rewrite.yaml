@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: kanboard-url-rewrite
-data:
-  ENABLE_URL_REWRITE: "{{.Values.configuration.urlRewrite.enable}}"

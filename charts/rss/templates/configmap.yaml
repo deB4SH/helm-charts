@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{lower .Release.Name}}-feeds
-data:
-  feeds.txt: {{- .Values.configuration.feeds | toYaml | indent 1 }}
