@@ -1,0 +1,6 @@
+[submodule "charts/phanpy"]
+	path = charts/phanpy
+	url = https://github.com/deB4SH/helm-phanpy.git
+[submodule "charts/matrix-synapse"]
+	path = charts/matrix-synapse
+	url = https://github.com/deB4SH/helm-matrix-synapse.git
