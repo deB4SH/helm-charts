@@ -4,3 +4,6 @@
 [submodule "charts/matrix-synapse"]
 	path = charts/matrix-synapse
 	url = https://github.com/deB4SH/helm-matrix-synapse.git
+[submodule "charts/popeye"]
+	path = charts/popeye
+	url = https://github.com/deB4SH/helm-popeye.git
