@@ -10,3 +10,6 @@
 [submodule "charts/opentelemetry-collector"]
 	path = charts/opentelemetry-collector
 	url = https://github.com/deB4SH/helm-opentelemetry-collector.git
+[submodule "charts/kanboard"]
+	path = charts/kanboard
+	url = https://github.com/deB4SH/helm-kanboard.git
