@@ -7,3 +7,6 @@
 [submodule "charts/popeye"]
 	path = charts/popeye
 	url = https://github.com/deB4SH/helm-popeye.git
+[submodule "charts/opentelemetry-collector"]
+	path = charts/opentelemetry-collector
+	url = https://github.com/deB4SH/helm-opentelemetry-collector.git
